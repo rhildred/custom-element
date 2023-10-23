@@ -22,4 +22,9 @@ markdown text
 
 ```
 
-I also intended this as a little vite custom element demo. If you turn on read and write permissions for actions in your project settings and replace the code in `lib/index.js` with your own code it will serve your custom element from github pages. 
+I also intended this as a little vite custom element demo. If you turn on read and write permissions for actions in your project settings and replace the code in `lib/index.js` with your own code it will serve your custom element from github pages. var req = Object.create(http.IncomingMessage.prototype)
+
+NOTE:
+
+WIP `var req = Object.create(http.IncomingMessage.prototype)`, `var res = Object.create(http.ServerResponse.prototype)` (I think I need to pollyfill these) 
+
