@@ -1468,12 +1468,16 @@ _.parse;
 w.lex;
 class he extends HTMLElement {
   // (1)
+  constructor() {
+    super();
+  }
   async connectedCallback() {
-    if (this.attributes.src) {
-      const n = this.attributes.src.baseURI + this.attributes.src.value, e = await (await fetch(n)).text();
-      this.innerHTML = k(e);
-    } else
-      this.innerHTML = k(this.innerHTML);
+    if (!this.ariaExpanded)
+      if (this.ariaExpanded = !0, this.attributes.src) {
+        const n = this.attributes.src.baseURI + this.attributes.src.value, e = await (await fetch(n)).text();
+        this.innerHTML = k(e);
+      } else
+        this.innerHTML = k(this.innerHTML);
   }
 }
 customElements.define("x-markdown2html", he);
