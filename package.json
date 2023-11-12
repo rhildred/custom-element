@@ -15,6 +15,7 @@
     "mocha": "^10.2.0",
     "supertest": "^6.3.3",
     "vite": "^4.4.5",
-    "vite-plugin-node-polyfills": "^0.15.0"
+    "vite-plugin-node-polyfills": "^0.15.0",
+    "x2js": "^3.4.4"
   }
 }
