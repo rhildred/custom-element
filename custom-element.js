@@ -5492,10 +5492,12 @@ class rr extends HTMLElement {
         r && (this.attributes.src = r);
       }
       if (this.attributes.src) {
-        const u = new URL(this.attributes.src.replace("https:/", "https://wp-now-corsproxy.rhildred.workers.dev/corsproxy")), e = await (await fetch(u)).text();
-        if (this.innerHTML = $(e), window.frameElement) {
-          const a = window.frameElement;
-          a.width = a.contentWindow.document.body.scrollWidth + 50, a.height = a.contentWindow.document.body.scrollHeight + 50;
+        let u = this.attributes.src;
+        typeof u != "string" && (u = this.attributes.src.value);
+        const r = new URL(u.replace("https:/", "https://wp-now-corsproxy.rhildred.workers.dev/corsproxy")), a = await (await fetch(r)).text();
+        if (this.innerHTML = $(a), window.frameElement) {
+          const s = window.frameElement;
+          s.width = s.contentWindow.document.body.scrollWidth + 50, s.height = s.contentWindow.document.body.scrollHeight + 50;
         }
       } else
         this.innerHTML = $(this.innerHTML);
