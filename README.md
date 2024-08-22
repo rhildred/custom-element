@@ -22,6 +22,13 @@ markdown text
 
 ```
 
+or
+
+```
+<p></p>
+<div><iframe srcdoc="<x-markdown2html src='https://github.com/rhildred/custom-element/raw/main/README.md'></x-markdown2html><script src='https://rhildred.github.io/custom-element/custom-element.js'></script>" frameborder="0"></iframe></div>
+```
+
 You can also imbed this as an iframe
 
 ```html
