@@ -5493,7 +5493,7 @@ class rr extends HTMLElement {
       }
       if (this.attributes.src) {
         const u = new URL(this.attributes.src.replace("https:/", "https://wp-now-corsproxy.rhildred.workers.dev/corsproxy")), e = await (await fetch(u)).text();
-        if (this.innerHTML = $(e), window.frameElement && window.frameElement.getAttribute("data-src")) {
+        if (this.innerHTML = $(e), window.frameElement) {
           const a = window.frameElement;
           a.width = a.contentWindow.document.body.scrollWidth + 50, a.height = a.contentWindow.document.body.scrollHeight + 50;
         }
