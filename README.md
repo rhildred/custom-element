@@ -25,7 +25,7 @@ markdown text
 You can also imbed this as an iframe
 
 ```html
-<iframe src="https://rhildred.github.io/custom-element/index.html" data-src="https://github.com/rhildred/custom-element/raw/main/README.md" frameborder="0"></iframe>
+<iframe src="https://rhildred.github.io/custom-element/index.html?src=https://github.com/rhildred/custom-element/raw/main/README.md" frameborder="0"></iframe>
 ```
 
 I did this so that I can embed my repositories in d2l/brightspace
