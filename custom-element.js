@@ -5484,15 +5484,22 @@ class rr extends HTMLElement {
     super();
   }
   async connectedCallback() {
-    if (!this.ariaExpanded)
-      if (this.ariaExpanded = !0, window.frameElement.getAttribute("data-src") && (this.attributes.src = window.frameElement.getAttribute("data-src")), this.attributes.src) {
-        const u = this.attributes.src.replace("https:/", "https://wp-now-corsproxy.rhildred.workers.dev/corsproxy"), e = await (await fetch(u)).text();
-        if (this.innerHTML = $(e), window.frameElement.getAttribute("data-src")) {
+    if (!this.ariaExpanded) {
+      if (this.ariaExpanded = !0, window.frameElement && window.frameElement.getAttribute("data-src"))
+        this.attributes.src = window.frameElement.getAttribute("data-src");
+      else {
+        const r = new URLSearchParams(window.location.search).get("src");
+        r && (this.attributes.src = r);
+      }
+      if (this.attributes.src) {
+        const u = new URL(this.attributes.src.replace("https:/", "https://wp-now-corsproxy.rhildred.workers.dev/corsproxy")), e = await (await fetch(u)).text();
+        if (this.innerHTML = $(e), window.frameElement && window.frameElement.getAttribute("data-src")) {
           const a = window.frameElement;
           a.width = a.contentWindow.document.body.scrollWidth + 50, a.height = a.contentWindow.document.body.scrollHeight + 50;
         }
       } else
         this.innerHTML = $(this.innerHTML);
+    }
   }
 }
 customElements.define("x-markdown2html", rr);
