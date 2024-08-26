@@ -5513,7 +5513,7 @@ class ur extends HTMLElement {
     if (!this.ariaExpanded) {
       this.ariaExpanded = !0;
       const r = window.parent.API.Activity.ItemIdentifier.split("/");
-      let e = ["https:/", "github.com"] + r.slice(0, 2) + ["raw", "main"] + r.slice(2) + ["slides.Rmd"];
+      let e = ["https:/", "github.com"].concat(r.slice(0, 2)).concat(["raw", "main"]).concat(r.slice(2)).concat(["slides.Rmd"]);
       console.log(e);
       const a = e.join("/");
       this.innerHTML = `<x-markdown2html src="${a}"></x-markdown2html>`;
