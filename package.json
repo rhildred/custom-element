@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "vite build",
     "build:index": "vite build --config vite.index.config.js",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "vitest"
   },
   "devDependencies": {
     "chai": "^4.3.10",
@@ -17,6 +18,7 @@
     "supertest": "^6.3.3",
     "vite": "^4.4.5",
     "vite-plugin-node-polyfills": "^0.15.0",
+    "vitest": "^2.0.5",
     "x2js": "^3.4.4"
   }
 }
