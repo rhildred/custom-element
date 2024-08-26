@@ -5512,7 +5512,10 @@ class ur extends HTMLElement {
   async connectedCallback() {
     if (!this.ariaExpanded) {
       this.ariaExpanded = !0;
-      const r = window.parent.API.Activity.ItemIdentifier.split("/"), a = (["https:/", "github.com"] + r.slice(0, 2) + ["raw", "main"] + r.slice(3) + ["slides.Rmd"]).join("/");
+      const r = window.parent.API.Activity.ItemIdentifier.split("/");
+      let e = ["https:/", "github.com"] + r.slice(0, 2) + ["raw", "main"] + r.slice(3) + ["slides.Rmd"];
+      console.log(e);
+      const a = e.join("/");
       this.innerHTML = `<x-markdown2html src="${a}"></x-markdown2html>`;
     }
   }
