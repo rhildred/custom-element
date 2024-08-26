@@ -34,21 +34,21 @@ const Nt = /[&<>"']/, Mt = new RegExp(Nt.source, "g"), St = /[<>"']|&(?!(#\d{1,7
   ">": "&gt;",
   '"': "&quot;",
   "'": "&#39;"
-}, Et = (m) => zt[m];
+}, bt = (m) => zt[m];
 function se(m, u) {
   if (u) {
     if (Nt.test(m))
-      return m.replace(Mt, Et);
+      return m.replace(Mt, bt);
   } else if (St.test(m))
-    return m.replace(Ut, Et);
+    return m.replace(Ut, bt);
   return m;
 }
-const $t = /&(#(?:\d+)|(?:#x[0-9A-Fa-f]+)|(?:\w+));?/ig;
-function Pt(m) {
-  return m.replace($t, (u, r) => (r = r.toLowerCase(), r === "colon" ? ":" : r.charAt(0) === "#" ? r.charAt(1) === "x" ? String.fromCharCode(parseInt(r.substring(2), 16)) : String.fromCharCode(+r.substring(1)) : ""));
+const Pt = /&(#(?:\d+)|(?:#x[0-9A-Fa-f]+)|(?:\w+));?/ig;
+function $t(m) {
+  return m.replace(Pt, (u, r) => (r = r.toLowerCase(), r === "colon" ? ":" : r.charAt(0) === "#" ? r.charAt(1) === "x" ? String.fromCharCode(parseInt(r.substring(2), 16)) : String.fromCharCode(+r.substring(1)) : ""));
 }
 const Vt = /(^|[^\[])\^/g;
-function P(m, u) {
+function $(m, u) {
   m = typeof m == "string" ? m : m.source, u = u || "";
   const r = {
     replace: (e, a) => (a = typeof a == "object" && "source" in a ? a.source : a, a = a.replace(Vt, "$1"), m = m.replace(e, a), r),
@@ -56,7 +56,7 @@ function P(m, u) {
   };
   return r;
 }
-function bt(m) {
+function Et(m) {
   try {
     m = encodeURI(m).replace(/%25/g, "%");
   } catch {
@@ -246,7 +246,7 @@ class Ze {
       const o = new RegExp(`^( {0,3}${e})((?:[	 ][^\\n]*)?(?:\\n|$))`);
       let d = "", g = "", v = !1;
       for (; u; ) {
-        let E = !1;
+        let b = !1;
         if (!(r = o.exec(u)) || this.rules.block.hr.test(u))
           break;
         d = r[0], u = u.substring(d.length);
@@ -256,7 +256,7 @@ class Ze {
         this.options.pedantic ? (q = 2, g = _.trimStart()) : (q = r[2].search(/[^ ]/), q = q > 4 ? 1 : q, g = _.slice(q), q += r[1].length);
         let J = !1;
         if (!_ && /^ *$/.test(k) && (d += k + `
-`, u = u.substring(k.length + 1), E = !0), !E) {
+`, u = u.substring(k.length + 1), b = !0), !b) {
           const O = new RegExp(`^ {0,${Math.min(3, q - 1)}}(?:[*+-]|\\d{1,9}[.)])((?:[ 	][^\\n]*)?(?:\\n|$))`), I = new RegExp(`^ {0,${Math.min(3, q - 1)}}((?:- *){3,}|(?:_ *){3,}|(?:\\* *){3,})(?:\\n+|$)`), L = new RegExp(`^ {0,${Math.min(3, q - 1)}}(?:\`\`\`|~~~)`), Z = new RegExp(`^ {0,${Math.min(3, q - 1)}}#`);
           for (; u; ) {
             const V = u.split(`
@@ -277,26 +277,26 @@ class Ze {
           }
         }
         s.loose || (v ? s.loose = !0 : /\n *\n *$/.test(d) && (v = !0));
-        let X = null, b;
-        this.options.gfm && (X = /^\[[ xX]\] /.exec(g), X && (b = X[0] !== "[ ] ", g = g.replace(/^\[[ xX]\] +/, ""))), s.items.push({
+        let X = null, E;
+        this.options.gfm && (X = /^\[[ xX]\] /.exec(g), X && (E = X[0] !== "[ ] ", g = g.replace(/^\[[ xX]\] +/, ""))), s.items.push({
           type: "list_item",
           raw: d,
           task: !!X,
-          checked: b,
+          checked: E,
           loose: !1,
           text: g,
           tokens: []
         }), s.raw += d;
       }
       s.items[s.items.length - 1].raw = d.trimEnd(), s.items[s.items.length - 1].text = g.trimEnd(), s.raw = s.raw.trimEnd();
-      for (let E = 0; E < s.items.length; E++)
-        if (this.lexer.state.top = !1, s.items[E].tokens = this.lexer.blockTokens(s.items[E].text, []), !s.loose) {
-          const _ = s.items[E].tokens.filter((q) => q.type === "space"), k = _.length > 0 && _.some((q) => /\n.*\n/.test(q.raw));
+      for (let b = 0; b < s.items.length; b++)
+        if (this.lexer.state.top = !1, s.items[b].tokens = this.lexer.blockTokens(s.items[b].text, []), !s.loose) {
+          const _ = s.items[b].tokens.filter((q) => q.type === "space"), k = _.length > 0 && _.some((q) => /\n.*\n/.test(q.raw));
           s.loose = k;
         }
       if (s.loose)
-        for (let E = 0; E < s.items.length; E++)
-          s.items[E].loose = !0;
+        for (let b = 0; b < s.items.length; b++)
+          s.items[b].loose = !0;
       return s;
     }
   }
@@ -459,7 +459,7 @@ class Ze {
       return;
     if (!(a[1] || a[2] || "") || !e || this.rules.inline.punctuation.exec(e)) {
       const o = [...a[0]].length - 1;
-      let d, g, v = o, E = 0;
+      let d, g, v = o, b = 0;
       const _ = a[0][0] === "*" ? this.rules.inline.emStrong.rDelimAst : this.rules.inline.emStrong.rDelimUnd;
       for (_.lastIndex = 0, r = r.slice(-1 * u.length + o); (a = _.exec(r)) != null; ) {
         if (d = a[1] || a[2] || a[3] || a[4] || a[5] || a[6], !d)
@@ -468,12 +468,12 @@ class Ze {
           v += g;
           continue;
         } else if ((a[5] || a[6]) && o % 3 && !((o + g) % 3)) {
-          E += g;
+          b += g;
           continue;
         }
         if (v -= g, v > 0)
           continue;
-        g = Math.min(g, g + v + E);
+        g = Math.min(g, g + v + b);
         const k = [...a[0]][0].length, q = u.slice(0, o + a.index + k + g);
         if (Math.min(o, g) % 2) {
           const X = q.slice(1, -1);
@@ -602,32 +602,32 @@ const S = {
 };
 S._label = /(?!\s*\])(?:\\.|[^\[\]\\])+/;
 S._title = /(?:"(?:\\"?|[^"\\])*"|'[^'\n]*(?:\n[^'\n]+)*\n?'|\([^()]*\))/;
-S.def = P(S.def).replace("label", S._label).replace("title", S._title).getRegex();
+S.def = $(S.def).replace("label", S._label).replace("title", S._title).getRegex();
 S.bullet = /(?:[*+-]|\d{1,9}[.)])/;
-S.listItemStart = P(/^( *)(bull) */).replace("bull", S.bullet).getRegex();
-S.list = P(S.list).replace(/bull/g, S.bullet).replace("hr", "\\n+(?=\\1?(?:(?:- *){3,}|(?:_ *){3,}|(?:\\* *){3,})(?:\\n+|$))").replace("def", "\\n+(?=" + S.def.source + ")").getRegex();
+S.listItemStart = $(/^( *)(bull) */).replace("bull", S.bullet).getRegex();
+S.list = $(S.list).replace(/bull/g, S.bullet).replace("hr", "\\n+(?=\\1?(?:(?:- *){3,}|(?:_ *){3,}|(?:\\* *){3,})(?:\\n+|$))").replace("def", "\\n+(?=" + S.def.source + ")").getRegex();
 S._tag = "address|article|aside|base|basefont|blockquote|body|caption|center|col|colgroup|dd|details|dialog|dir|div|dl|dt|fieldset|figcaption|figure|footer|form|frame|frameset|h[1-6]|head|header|hr|html|iframe|legend|li|link|main|menu|menuitem|meta|nav|noframes|ol|optgroup|option|p|param|section|source|summary|table|tbody|td|tfoot|th|thead|title|tr|track|ul";
 S._comment = /<!--(?!-?>)[\s\S]*?(?:-->|$)/;
-S.html = P(S.html, "i").replace("comment", S._comment).replace("tag", S._tag).replace("attribute", / +[a-zA-Z:_][\w.:-]*(?: *= *"[^"\n]*"| *= *'[^'\n]*'| *= *[^\s"'=<>`]+)?/).getRegex();
-S.lheading = P(S.lheading).replace(/bull/g, S.bullet).getRegex();
-S.paragraph = P(S._paragraph).replace("hr", S.hr).replace("heading", " {0,3}#{1,6}(?:\\s|$)").replace("|lheading", "").replace("|table", "").replace("blockquote", " {0,3}>").replace("fences", " {0,3}(?:`{3,}(?=[^`\\n]*\\n)|~{3,})[^\\n]*\\n").replace("list", " {0,3}(?:[*+-]|1[.)]) ").replace("html", "</?(?:tag)(?: +|\\n|/?>)|<(?:script|pre|style|textarea|!--)").replace("tag", S._tag).getRegex();
-S.blockquote = P(S.blockquote).replace("paragraph", S.paragraph).getRegex();
+S.html = $(S.html, "i").replace("comment", S._comment).replace("tag", S._tag).replace("attribute", / +[a-zA-Z:_][\w.:-]*(?: *= *"[^"\n]*"| *= *'[^'\n]*'| *= *[^\s"'=<>`]+)?/).getRegex();
+S.lheading = $(S.lheading).replace(/bull/g, S.bullet).getRegex();
+S.paragraph = $(S._paragraph).replace("hr", S.hr).replace("heading", " {0,3}#{1,6}(?:\\s|$)").replace("|lheading", "").replace("|table", "").replace("blockquote", " {0,3}>").replace("fences", " {0,3}(?:`{3,}(?=[^`\\n]*\\n)|~{3,})[^\\n]*\\n").replace("list", " {0,3}(?:[*+-]|1[.)]) ").replace("html", "</?(?:tag)(?: +|\\n|/?>)|<(?:script|pre|style|textarea|!--)").replace("tag", S._tag).getRegex();
+S.blockquote = $(S.blockquote).replace("paragraph", S.paragraph).getRegex();
 S.normal = { ...S };
 S.gfm = {
   ...S.normal,
   table: "^ *([^\\n ].*)\\n {0,3}((?:\\| *)?:?-+:? *(?:\\| *:?-+:? *)*(?:\\| *)?)(?:\\n((?:(?! *\\n|hr|heading|blockquote|code|fences|list|html).*(?:\\n|$))*)\\n*|$)"
   // Cells
 };
-S.gfm.table = P(S.gfm.table).replace("hr", S.hr).replace("heading", " {0,3}#{1,6}(?:\\s|$)").replace("blockquote", " {0,3}>").replace("code", " {4}[^\\n]").replace("fences", " {0,3}(?:`{3,}(?=[^`\\n]*\\n)|~{3,})[^\\n]*\\n").replace("list", " {0,3}(?:[*+-]|1[.)]) ").replace("html", "</?(?:tag)(?: +|\\n|/?>)|<(?:script|pre|style|textarea|!--)").replace("tag", S._tag).getRegex();
-S.gfm.paragraph = P(S._paragraph).replace("hr", S.hr).replace("heading", " {0,3}#{1,6}(?:\\s|$)").replace("|lheading", "").replace("table", S.gfm.table).replace("blockquote", " {0,3}>").replace("fences", " {0,3}(?:`{3,}(?=[^`\\n]*\\n)|~{3,})[^\\n]*\\n").replace("list", " {0,3}(?:[*+-]|1[.)]) ").replace("html", "</?(?:tag)(?: +|\\n|/?>)|<(?:script|pre|style|textarea|!--)").replace("tag", S._tag).getRegex();
+S.gfm.table = $(S.gfm.table).replace("hr", S.hr).replace("heading", " {0,3}#{1,6}(?:\\s|$)").replace("blockquote", " {0,3}>").replace("code", " {4}[^\\n]").replace("fences", " {0,3}(?:`{3,}(?=[^`\\n]*\\n)|~{3,})[^\\n]*\\n").replace("list", " {0,3}(?:[*+-]|1[.)]) ").replace("html", "</?(?:tag)(?: +|\\n|/?>)|<(?:script|pre|style|textarea|!--)").replace("tag", S._tag).getRegex();
+S.gfm.paragraph = $(S._paragraph).replace("hr", S.hr).replace("heading", " {0,3}#{1,6}(?:\\s|$)").replace("|lheading", "").replace("table", S.gfm.table).replace("blockquote", " {0,3}>").replace("fences", " {0,3}(?:`{3,}(?=[^`\\n]*\\n)|~{3,})[^\\n]*\\n").replace("list", " {0,3}(?:[*+-]|1[.)]) ").replace("html", "</?(?:tag)(?: +|\\n|/?>)|<(?:script|pre|style|textarea|!--)").replace("tag", S._tag).getRegex();
 S.pedantic = {
   ...S.normal,
-  html: P(`^ *(?:comment *(?:\\n|\\s*$)|<(tag)[\\s\\S]+?</\\1> *(?:\\n{2,}|\\s*$)|<tag(?:"[^"]*"|'[^']*'|\\s[^'"/>\\s]*)*?/?> *(?:\\n{2,}|\\s*$))`).replace("comment", S._comment).replace(/tag/g, "(?!(?:a|em|strong|small|s|cite|q|dfn|abbr|data|time|code|var|samp|kbd|sub|sup|i|b|u|mark|ruby|rt|rp|bdi|bdo|span|br|wbr|ins|del|img)\\b)\\w+(?!:|[^\\w\\s@]*@)\\b").getRegex(),
+  html: $(`^ *(?:comment *(?:\\n|\\s*$)|<(tag)[\\s\\S]+?</\\1> *(?:\\n{2,}|\\s*$)|<tag(?:"[^"]*"|'[^']*'|\\s[^'"/>\\s]*)*?/?> *(?:\\n{2,}|\\s*$))`).replace("comment", S._comment).replace(/tag/g, "(?!(?:a|em|strong|small|s|cite|q|dfn|abbr|data|time|code|var|samp|kbd|sub|sup|i|b|u|mark|ruby|rt|rp|bdi|bdo|span|br|wbr|ins|del|img)\\b)\\w+(?!:|[^\\w\\s@]*@)\\b").getRegex(),
   def: /^ *\[([^\]]+)\]: *<?([^\s>]+)>?(?: +(["(][^\n]+[")]))? *(?:\n+|$)/,
   heading: /^(#{1,6})(.*)(?:\n+|$)/,
   fences: Xe,
   lheading: /^(.+?)\n {0,3}(=+|-+) *(?:\n+|$)/,
-  paragraph: P(S.normal._paragraph).replace("hr", S.hr).replace("heading", ` *#{1,6} *[^
+  paragraph: $(S.normal._paragraph).replace("hr", S.hr).replace("heading", ` *#{1,6} *[^
 ]`).replace("lheading", S.lheading).replace("blockquote", " {0,3}>").replace("|fences", "").replace("|list", "").replace("|html", "").getRegex()
 };
 const y = {
@@ -654,28 +654,28 @@ const y = {
   punctuation: /^((?![*_])[\spunctuation])/
 };
 y._punctuation = "\\p{P}$+<=>`^|~";
-y.punctuation = P(y.punctuation, "u").replace(/punctuation/g, y._punctuation).getRegex();
+y.punctuation = $(y.punctuation, "u").replace(/punctuation/g, y._punctuation).getRegex();
 y.blockSkip = /\[[^[\]]*?\]\([^\(\)]*?\)|`[^`]*?`|<[^<>]*?>/g;
 y.anyPunctuation = /\\[punct]/g;
 y._escapes = /\\([punct])/g;
-y._comment = P(S._comment).replace("(?:-->|$)", "-->").getRegex();
-y.emStrong.lDelim = P(y.emStrong.lDelim, "u").replace(/punct/g, y._punctuation).getRegex();
-y.emStrong.rDelimAst = P(y.emStrong.rDelimAst, "gu").replace(/punct/g, y._punctuation).getRegex();
-y.emStrong.rDelimUnd = P(y.emStrong.rDelimUnd, "gu").replace(/punct/g, y._punctuation).getRegex();
-y.anyPunctuation = P(y.anyPunctuation, "gu").replace(/punct/g, y._punctuation).getRegex();
-y._escapes = P(y._escapes, "gu").replace(/punct/g, y._punctuation).getRegex();
+y._comment = $(S._comment).replace("(?:-->|$)", "-->").getRegex();
+y.emStrong.lDelim = $(y.emStrong.lDelim, "u").replace(/punct/g, y._punctuation).getRegex();
+y.emStrong.rDelimAst = $(y.emStrong.rDelimAst, "gu").replace(/punct/g, y._punctuation).getRegex();
+y.emStrong.rDelimUnd = $(y.emStrong.rDelimUnd, "gu").replace(/punct/g, y._punctuation).getRegex();
+y.anyPunctuation = $(y.anyPunctuation, "gu").replace(/punct/g, y._punctuation).getRegex();
+y._escapes = $(y._escapes, "gu").replace(/punct/g, y._punctuation).getRegex();
 y._scheme = /[a-zA-Z][a-zA-Z0-9+.-]{1,31}/;
 y._email = /[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+(@)[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+(?![-_])/;
-y.autolink = P(y.autolink).replace("scheme", y._scheme).replace("email", y._email).getRegex();
+y.autolink = $(y.autolink).replace("scheme", y._scheme).replace("email", y._email).getRegex();
 y._attribute = /\s+[a-zA-Z:_][\w.:-]*(?:\s*=\s*"[^"]*"|\s*=\s*'[^']*'|\s*=\s*[^\s"'=<>`]+)?/;
-y.tag = P(y.tag).replace("comment", y._comment).replace("attribute", y._attribute).getRegex();
+y.tag = $(y.tag).replace("comment", y._comment).replace("attribute", y._attribute).getRegex();
 y._label = /(?:\[(?:\\.|[^\[\]\\])*\]|\\.|`[^`]*`|[^\[\]\\`])*?/;
 y._href = /<(?:\\.|[^\n<>\\])+>|[^\s\x00-\x1f]*/;
 y._title = /"(?:\\"?|[^"\\])*"|'(?:\\'?|[^'\\])*'|\((?:\\\)?|[^)\\])*\)/;
-y.link = P(y.link).replace("label", y._label).replace("href", y._href).replace("title", y._title).getRegex();
-y.reflink = P(y.reflink).replace("label", y._label).replace("ref", S._label).getRegex();
-y.nolink = P(y.nolink).replace("ref", S._label).getRegex();
-y.reflinkSearch = P(y.reflinkSearch, "g").replace("reflink", y.reflink).replace("nolink", y.nolink).getRegex();
+y.link = $(y.link).replace("label", y._label).replace("href", y._href).replace("title", y._title).getRegex();
+y.reflink = $(y.reflink).replace("label", y._label).replace("ref", S._label).getRegex();
+y.nolink = $(y.nolink).replace("ref", S._label).getRegex();
+y.reflinkSearch = $(y.reflinkSearch, "g").replace("reflink", y.reflink).replace("nolink", y.nolink).getRegex();
 y.normal = { ...y };
 y.pedantic = {
   ...y.normal,
@@ -691,23 +691,23 @@ y.pedantic = {
     endAst: /\*(?!\*)/g,
     endUnd: /_(?!_)/g
   },
-  link: P(/^!?\[(label)\]\((.*?)\)/).replace("label", y._label).getRegex(),
-  reflink: P(/^!?\[(label)\]\s*\[([^\]]*)\]/).replace("label", y._label).getRegex()
+  link: $(/^!?\[(label)\]\((.*?)\)/).replace("label", y._label).getRegex(),
+  reflink: $(/^!?\[(label)\]\s*\[([^\]]*)\]/).replace("label", y._label).getRegex()
 };
 y.gfm = {
   ...y.normal,
-  escape: P(y.escape).replace("])", "~|])").getRegex(),
+  escape: $(y.escape).replace("])", "~|])").getRegex(),
   _extended_email: /[A-Za-z0-9._+-]+(@)[a-zA-Z0-9-_]+(?:\.[a-zA-Z0-9-_]*[a-zA-Z0-9])+(?![-_])/,
   url: /^((?:ftp|https?):\/\/|www\.)(?:[a-zA-Z0-9\-]+\.?)+[^\s<]*|^email/,
   _backpedal: /(?:[^?!.,:;*_'"~()&]+|\([^)]*\)|&(?![a-zA-Z0-9]+;$)|[?!.,:;*_'"~)]+(?!$))+/,
   del: /^(~~?)(?=[^\s~])([\s\S]*?[^\s~])\1(?=[^~]|$)/,
   text: /^([`~]+|[^`~])(?:(?= {2,}\n)|(?=[a-zA-Z0-9.!#$%&'*+\/=?_`{\|}~-]+@)|[\s\S]*?(?:(?=[\\<!\[`*~_]|\b_|https?:\/\/|ftp:\/\/|www\.|$)|[^ ](?= {2,}\n)|[^a-zA-Z0-9.!#$%&'*+\/=?_`{\|}~-](?=[a-zA-Z0-9.!#$%&'*+\/=?_`{\|}~-]+@)))/
 };
-y.gfm.url = P(y.gfm.url, "i").replace("email", y.gfm._extended_email).getRegex();
+y.gfm.url = $(y.gfm.url, "i").replace("email", y.gfm._extended_email).getRegex();
 y.breaks = {
   ...y.gfm,
-  br: P(y.br).replace("{2,}", "*").getRegex(),
-  text: P(y.gfm.text).replace("\\b_", "\\b_| {2,}\\n").replace(/\{2,\}/g, "*").getRegex()
+  br: $(y.br).replace("{2,}", "*").getRegex(),
+  text: $(y.gfm.text).replace("\\b_", "\\b_| {2,}\\n").replace(/\{2,\}/g, "*").getRegex()
 };
 class he {
   constructor(u) {
@@ -820,8 +820,8 @@ class he {
           let d = 1 / 0;
           const g = u.slice(1);
           let v;
-          this.options.extensions.startBlock.forEach((E) => {
-            v = E.call({ lexer: this }, g), typeof v == "number" && v >= 0 && (d = Math.min(d, v));
+          this.options.extensions.startBlock.forEach((b) => {
+            v = b.call({ lexer: this }, g), typeof v == "number" && v >= 0 && (d = Math.min(d, v));
           }), d < 1 / 0 && d >= 0 && (s = u.substring(0, d + 1));
         }
         if (this.state.top && (e = this.tokenizer.paragraph(s))) {
@@ -856,17 +856,17 @@ class he {
   inlineTokens(u, r = []) {
     let e, a, s, o = u, d, g, v;
     if (this.tokens.links) {
-      const E = Object.keys(this.tokens.links);
-      if (E.length > 0)
+      const b = Object.keys(this.tokens.links);
+      if (b.length > 0)
         for (; (d = this.tokenizer.rules.inline.reflinkSearch.exec(o)) != null; )
-          E.includes(d[0].slice(d[0].lastIndexOf("[") + 1, -1)) && (o = o.slice(0, d.index) + "[" + "a".repeat(d[0].length - 2) + "]" + o.slice(this.tokenizer.rules.inline.reflinkSearch.lastIndex));
+          b.includes(d[0].slice(d[0].lastIndexOf("[") + 1, -1)) && (o = o.slice(0, d.index) + "[" + "a".repeat(d[0].length - 2) + "]" + o.slice(this.tokenizer.rules.inline.reflinkSearch.lastIndex));
     }
     for (; (d = this.tokenizer.rules.inline.blockSkip.exec(o)) != null; )
       o = o.slice(0, d.index) + "[" + "a".repeat(d[0].length - 2) + "]" + o.slice(this.tokenizer.rules.inline.blockSkip.lastIndex);
     for (; (d = this.tokenizer.rules.inline.anyPunctuation.exec(o)) != null; )
       o = o.slice(0, d.index) + "++" + o.slice(this.tokenizer.rules.inline.anyPunctuation.lastIndex);
     for (; u; )
-      if (g || (v = ""), g = !1, !(this.options.extensions && this.options.extensions.inline && this.options.extensions.inline.some((E) => (e = E.call({ lexer: this }, u, r)) ? (u = u.substring(e.raw.length), r.push(e), !0) : !1))) {
+      if (g || (v = ""), g = !1, !(this.options.extensions && this.options.extensions.inline && this.options.extensions.inline.some((b) => (e = b.call({ lexer: this }, u, r)) ? (u = u.substring(e.raw.length), r.push(e), !0) : !1))) {
         if (e = this.tokenizer.escape(u)) {
           u = u.substring(e.raw.length), r.push(e);
           continue;
@@ -908,24 +908,24 @@ class he {
           continue;
         }
         if (s = u, this.options.extensions && this.options.extensions.startInline) {
-          let E = 1 / 0;
+          let b = 1 / 0;
           const _ = u.slice(1);
           let k;
           this.options.extensions.startInline.forEach((q) => {
-            k = q.call({ lexer: this }, _), typeof k == "number" && k >= 0 && (E = Math.min(E, k));
-          }), E < 1 / 0 && E >= 0 && (s = u.substring(0, E + 1));
+            k = q.call({ lexer: this }, _), typeof k == "number" && k >= 0 && (b = Math.min(b, k));
+          }), b < 1 / 0 && b >= 0 && (s = u.substring(0, b + 1));
         }
         if (e = this.tokenizer.inlineText(s)) {
           u = u.substring(e.raw.length), e.raw.slice(-1) !== "_" && (v = e.raw.slice(-1)), g = !0, a = r[r.length - 1], a && a.type === "text" ? (a.raw += e.raw, a.text += e.text) : r.push(e);
           continue;
         }
         if (u) {
-          const E = "Infinite loop on byte: " + u.charCodeAt(0);
+          const b = "Infinite loop on byte: " + u.charCodeAt(0);
           if (this.options.silent) {
-            console.error(E);
+            console.error(b);
             break;
           } else
-            throw new Error(E);
+            throw new Error(b);
         }
       }
     return r;
@@ -1013,7 +1013,7 @@ ${u}</tr>
     return `<del>${u}</del>`;
   }
   link(u, r, e) {
-    const a = bt(u);
+    const a = Et(u);
     if (a === null)
       return e;
     u = a;
@@ -1021,7 +1021,7 @@ ${u}</tr>
     return r && (s += ' title="' + r + '"'), s += ">" + e + "</a>", s;
   }
   image(u, r, e) {
-    const a = bt(u);
+    const a = Et(u);
     if (a === null)
       return e;
     u = a;
@@ -1104,7 +1104,7 @@ class de {
         }
         case "heading": {
           const o = s;
-          e += this.renderer.heading(this.parseInline(o.tokens), o.depth, Pt(this.parseInline(o.tokens, this.textRenderer)));
+          e += this.renderer.heading(this.parseInline(o.tokens), o.depth, $t(this.parseInline(o.tokens, this.textRenderer)));
           continue;
         }
         case "code": {
@@ -1115,12 +1115,12 @@ class de {
         case "table": {
           const o = s;
           let d = "", g = "";
-          for (let E = 0; E < o.header.length; E++)
-            g += this.renderer.tablecell(this.parseInline(o.header[E].tokens), { header: !0, align: o.align[E] });
+          for (let b = 0; b < o.header.length; b++)
+            g += this.renderer.tablecell(this.parseInline(o.header[b].tokens), { header: !0, align: o.align[b] });
           d += this.renderer.tablerow(g);
           let v = "";
-          for (let E = 0; E < o.rows.length; E++) {
-            const _ = o.rows[E];
+          for (let b = 0; b < o.rows.length; b++) {
+            const _ = o.rows[b];
             g = "";
             for (let k = 0; k < _.length; k++)
               g += this.renderer.tablecell(this.parseInline(_[k].tokens), { header: !1, align: o.align[k] });
@@ -1136,20 +1136,20 @@ class de {
         }
         case "list": {
           const o = s, d = o.ordered, g = o.start, v = o.loose;
-          let E = "";
+          let b = "";
           for (let _ = 0; _ < o.items.length; _++) {
             const k = o.items[_], q = k.checked, J = k.task;
             let X = "";
             if (k.task) {
-              const b = this.renderer.checkbox(!!q);
-              v ? k.tokens.length > 0 && k.tokens[0].type === "paragraph" ? (k.tokens[0].text = b + " " + k.tokens[0].text, k.tokens[0].tokens && k.tokens[0].tokens.length > 0 && k.tokens[0].tokens[0].type === "text" && (k.tokens[0].tokens[0].text = b + " " + k.tokens[0].tokens[0].text)) : k.tokens.unshift({
+              const E = this.renderer.checkbox(!!q);
+              v ? k.tokens.length > 0 && k.tokens[0].type === "paragraph" ? (k.tokens[0].text = E + " " + k.tokens[0].text, k.tokens[0].tokens && k.tokens[0].tokens.length > 0 && k.tokens[0].tokens[0].type === "text" && (k.tokens[0].tokens[0].text = E + " " + k.tokens[0].tokens[0].text)) : k.tokens.unshift({
                 type: "text",
-                text: b + " "
-              }) : X += b + " ";
+                text: E + " "
+              }) : X += E + " ";
             }
-            X += this.parse(k.tokens, v), E += this.renderer.listitem(X, J, !!q);
+            X += this.parse(k.tokens, v), b += this.renderer.listitem(X, J, !!q);
           }
-          e += this.renderer.list(E, d, g);
+          e += this.renderer.list(b, d, g);
           continue;
         }
         case "html": {
@@ -1351,9 +1351,9 @@ class Gt {
         const s = this.defaults.renderer || new Qe(this.defaults);
         for (const o in e.renderer) {
           const d = e.renderer[o], g = o, v = s[g];
-          s[g] = (...E) => {
-            let _ = d.apply(s, E);
-            return _ === !1 && (_ = v.apply(s, E)), _ || "";
+          s[g] = (...b) => {
+            let _ = d.apply(s, b);
+            return _ === !1 && (_ = v.apply(s, b)), _ || "";
           };
         }
         a.renderer = s;
@@ -1362,9 +1362,9 @@ class Gt {
         const s = this.defaults.tokenizer || new Ze(this.defaults);
         for (const o in e.tokenizer) {
           const d = e.tokenizer[o], g = o, v = s[g];
-          s[g] = (...E) => {
-            let _ = d.apply(s, E);
-            return _ === !1 && (_ = v.apply(s, E)), _;
+          s[g] = (...b) => {
+            let _ = d.apply(s, b);
+            return _ === !1 && (_ = v.apply(s, b)), _;
           };
         }
         a.tokenizer = s;
@@ -1373,14 +1373,14 @@ class Gt {
         const s = this.defaults.hooks || new Le();
         for (const o in e.hooks) {
           const d = e.hooks[o], g = o, v = s[g];
-          Le.passThroughHooks.has(o) ? s[g] = (E) => {
+          Le.passThroughHooks.has(o) ? s[g] = (b) => {
             if (this.defaults.async)
-              return Promise.resolve(d.call(s, E)).then((k) => v.call(s, k));
-            const _ = d.call(s, E);
+              return Promise.resolve(d.call(s, b)).then((k) => v.call(s, k));
+            const _ = d.call(s, b);
             return v.call(s, _);
-          } : s[g] = (...E) => {
-            let _ = d.apply(s, E);
-            return _ === !1 && (_ = v.apply(s, E)), _;
+          } : s[g] = (...b) => {
+            let _ = d.apply(s, b);
+            return _ === !1 && (_ = v.apply(s, b)), _;
           };
         }
         a.hooks = s;
@@ -1439,35 +1439,35 @@ Please report this to https://github.com/markedjs/marked.`, u) {
   };
 };
 const Te = new Gt();
-function $(m, u) {
+function P(m, u) {
   return Te.parse(m, u);
 }
-$.options = $.setOptions = function(m) {
-  return Te.setOptions(m), $.defaults = Te.defaults, Bt($.defaults), $;
+P.options = P.setOptions = function(m) {
+  return Te.setOptions(m), P.defaults = Te.defaults, Bt(P.defaults), P;
 };
-$.getDefaults = ot;
-$.defaults = _e;
-$.use = function(...m) {
-  return Te.use(...m), $.defaults = Te.defaults, Bt($.defaults), $;
+P.getDefaults = ot;
+P.defaults = _e;
+P.use = function(...m) {
+  return Te.use(...m), P.defaults = Te.defaults, Bt(P.defaults), P;
 };
-$.walkTokens = function(m, u) {
+P.walkTokens = function(m, u) {
   return Te.walkTokens(m, u);
 };
-$.parseInline = Te.parseInline;
-$.Parser = de;
-$.parser = de.parse;
-$.Renderer = Qe;
-$.TextRenderer = lt;
-$.Lexer = he;
-$.lexer = he.lex;
-$.Tokenizer = Ze;
-$.Hooks = Le;
-$.parse = $;
-$.options;
-$.setOptions;
-$.use;
-$.walkTokens;
-$.parseInline;
+P.parseInline = Te.parseInline;
+P.Parser = de;
+P.parser = de.parse;
+P.Renderer = Qe;
+P.TextRenderer = lt;
+P.Lexer = he;
+P.lexer = he.lex;
+P.Tokenizer = Ze;
+P.Hooks = Le;
+P.parse = P;
+P.options;
+P.setOptions;
+P.use;
+P.walkTokens;
+P.parseInline;
 de.parse;
 he.lex;
 var Xt = typeof globalThis < "u" ? globalThis : typeof window < "u" ? window : typeof global < "u" ? global : typeof self < "u" ? self : {};
@@ -1634,7 +1634,7 @@ function qt() {
     }
     i.constructor != t && (typeof t != "function" && console.error("unknown Class:" + t), i.constructor = t);
   }
-  var E = {}, _ = E.ELEMENT_NODE = 1, k = E.ATTRIBUTE_NODE = 2, q = E.TEXT_NODE = 3, J = E.CDATA_SECTION_NODE = 4, X = E.ENTITY_REFERENCE_NODE = 5, b = E.ENTITY_NODE = 6, O = E.PROCESSING_INSTRUCTION_NODE = 7, I = E.COMMENT_NODE = 8, L = E.DOCUMENT_NODE = 9, Z = E.DOCUMENT_TYPE_NODE = 10, V = E.DOCUMENT_FRAGMENT_NODE = 11, K = E.NOTATION_NODE = 12, M = {}, z = {};
+  var b = {}, _ = b.ELEMENT_NODE = 1, k = b.ATTRIBUTE_NODE = 2, q = b.TEXT_NODE = 3, J = b.CDATA_SECTION_NODE = 4, X = b.ENTITY_REFERENCE_NODE = 5, E = b.ENTITY_NODE = 6, O = b.PROCESSING_INSTRUCTION_NODE = 7, I = b.COMMENT_NODE = 8, L = b.DOCUMENT_NODE = 9, Z = b.DOCUMENT_TYPE_NODE = 10, V = b.DOCUMENT_FRAGMENT_NODE = 11, K = b.NOTATION_NODE = 12, M = {}, z = {};
   M.INDEX_SIZE_ERR = (z[1] = "Index size error", 1), M.DOMSTRING_SIZE_ERR = (z[2] = "DOMString size error", 2);
   var h = M.HIERARCHY_REQUEST_ERR = (z[3] = "Hierarchy request error", 3);
   M.WRONG_DOCUMENT_ERR = (z[4] = "Wrong document", 4), M.INVALID_CHARACTER_ERR = (z[5] = "Invalid character", 5), M.NO_DATA_ALLOWED_ERR = (z[6] = "No data allowed", 6), M.NO_MODIFICATION_ALLOWED_ERR = (z[7] = "No modification allowed", 7);
@@ -1850,7 +1850,7 @@ function qt() {
      * @see https://www.w3.org/TR/xml-names/#ns-qualnames XML Namespaces: Qualified names
      */
     createDocumentType: function(t, n, i) {
-      var f = new Pe();
+      var f = new $e();
       return f.name = t, f.nodeName = t, f.publicId = n || "", f.systemId = i || "", f;
     }
   };
@@ -1871,10 +1871,10 @@ function qt() {
     localName: null,
     // Modified in DOM Level 2:
     insertBefore: function(t, n) {
-      return Ee(this, t, n);
+      return be(this, t, n);
     },
     replaceChild: function(t, n) {
-      Ee(this, t, n, ze), n && this.removeChild(n);
+      be(this, t, n, ze), n && this.removeChild(n);
     },
     removeChild: function(t) {
       return ne(this, t);
@@ -1948,7 +1948,7 @@ function qt() {
   function Y(t) {
     return t == "<" && "&lt;" || t == ">" && "&gt;" || t == "&" && "&amp;" || t == '"' && "&quot;" || "&#" + t.charCodeAt() + ";";
   }
-  g(E, B), g(E, B.prototype);
+  g(b, B), g(b, B.prototype);
   function ae(t, n) {
     if (n(t))
       return !0;
@@ -1971,7 +1971,7 @@ function qt() {
     var A = i.namespaceURI;
     A === r.XMLNS && delete n._nsMap[i.prefix ? i.localName : ""];
   }
-  function be(t, n, i) {
+  function Ee(t, n, i) {
     if (t && t._inc) {
       t._inc++;
       var f = n.childNodes;
@@ -1986,7 +1986,7 @@ function qt() {
   }
   function ne(t, n) {
     var i = n.previousSibling, f = n.nextSibling;
-    return i ? i.nextSibling = f : t.firstChild = f, f ? f.previousSibling = i : t.lastChild = i, n.parentNode = null, n.previousSibling = null, n.nextSibling = null, be(t.ownerDocument, t), n;
+    return i ? i.nextSibling = f : t.firstChild = f, f ? f.previousSibling = i : t.lastChild = i, n.parentNode = null, n.previousSibling = null, n.nextSibling = null, Ee(t.ownerDocument, t), n;
   }
   function ce(t) {
     return t && (t.nodeType === B.DOCUMENT_NODE || t.nodeType === B.DOCUMENT_FRAGMENT_NODE || t.nodeType === B.ELEMENT_NODE);
@@ -2082,7 +2082,7 @@ function qt() {
         throw new T(h, "Doctype can only be inserted before an element");
     }
   }
-  function Ee(t, n, i, f) {
+  function be(t, n, i, f) {
     ee(t, n, i), t.nodeType === B.DOCUMENT_NODE && (f || Ue)(t, n, i);
     var A = n.parentNode;
     if (A && A.removeChild(n), n.nodeType === V) {
@@ -2097,10 +2097,10 @@ function qt() {
     do
       R.parentNode = t;
     while (R !== H && (R = R.nextSibling));
-    return be(t.ownerDocument || t, t), n.nodeType == V && (n.firstChild = n.lastChild = null), n;
+    return Ee(t.ownerDocument || t, t), n.nodeType == V && (n.firstChild = n.lastChild = null), n;
   }
-  function $e(t, n) {
-    return n.parentNode && n.parentNode.removeChild(n), n.parentNode = t, n.previousSibling = t.lastChild, n.nextSibling = null, n.previousSibling ? n.previousSibling.nextSibling = n : t.firstChild = n, t.lastChild = n, be(t.ownerDocument, t, n), n;
+  function Pe(t, n) {
+    return n.parentNode && n.parentNode.removeChild(n), n.parentNode = t, n.previousSibling = t.lastChild, n.nextSibling = null, n.previousSibling ? n.previousSibling.nextSibling = n : t.firstChild = n, t.lastChild = n, Ee(t.ownerDocument, t, n), n;
   }
   Q.prototype = {
     //implementation : null,
@@ -2123,13 +2123,13 @@ function qt() {
         }
         return t;
       }
-      return Ee(this, t, n), t.ownerDocument = this, this.documentElement === null && t.nodeType === _ && (this.documentElement = t), t;
+      return be(this, t, n), t.ownerDocument = this, this.documentElement === null && t.nodeType === _ && (this.documentElement = t), t;
     },
     removeChild: function(t) {
       return this.documentElement == t && (this.documentElement = null), ne(this, t);
     },
     replaceChild: function(t, n) {
-      Ee(this, t, n, ze), t.ownerDocument = this, n && this.removeChild(n), le(t) && (this.documentElement = t);
+      be(this, t, n, ze), t.ownerDocument = this, n && this.removeChild(n), le(t) && (this.documentElement = t);
     },
     // Introduced in DOM Level 2:
     importNode: function(t, n) {
@@ -2250,7 +2250,7 @@ function qt() {
     },
     //four real opeartion method
     appendChild: function(t) {
-      return t.nodeType === V ? this.insertBefore(t, null) : $e(this, t);
+      return t.nodeType === V ? this.insertBefore(t, null) : Pe(this, t);
     },
     setAttributeNode: function(t) {
       return this.attributes.setNamedItem(t);
@@ -2348,15 +2348,15 @@ function qt() {
     nodeName: "#cdata-section",
     nodeType: J
   }, v(et, we);
-  function Pe() {
+  function $e() {
   }
-  Pe.prototype.nodeType = Z, v(Pe, B);
+  $e.prototype.nodeType = Z, v($e, B);
   function ct() {
   }
   ct.prototype.nodeType = K, v(ct, B);
   function pt() {
   }
-  pt.prototype.nodeType = b, v(pt, B);
+  pt.prototype.nodeType = E, v(pt, B);
   function tt() {
   }
   tt.prototype.nodeType = X, v(tt, B);
@@ -2578,7 +2578,7 @@ function qt() {
     }
   } catch {
   }
-  return me.DocumentType = Pe, me.DOMException = T, me.DOMImplementation = U, me.Element = j, me.Node = B, me.NodeList = F, me.XMLSerializer = ft, me;
+  return me.DocumentType = $e, me.DOMException = T, me.DOMImplementation = U, me.Element = j, me.Node = B, me.NodeList = F, me.XMLSerializer = ft, me;
 }
 var Ie = {}, st = {}, yt;
 function Qt() {
@@ -4725,7 +4725,7 @@ function Yt() {
   if (kt)
     return Ge;
   kt = 1;
-  var m = We().NAMESPACE, u = /[A-Z_a-z\xC0-\xD6\xD8-\xF6\u00F8-\u02FF\u0370-\u037D\u037F-\u1FFF\u200C-\u200D\u2070-\u218F\u2C00-\u2FEF\u3001-\uD7FF\uF900-\uFDCF\uFDF0-\uFFFD]/, r = new RegExp("[\\-\\.0-9" + u.source.slice(1, -1) + "\\u00B7\\u0300-\\u036F\\u203F-\\u2040]"), e = new RegExp("^" + u.source + r.source + "*(?::" + u.source + r.source + "*)?$"), a = 0, s = 1, o = 2, d = 3, g = 4, v = 5, E = 6, _ = 7;
+  var m = We().NAMESPACE, u = /[A-Z_a-z\xC0-\xD6\xD8-\xF6\u00F8-\u02FF\u0370-\u037D\u037F-\u1FFF\u200C-\u200D\u2070-\u218F\u2C00-\u2FEF\u3001-\uD7FF\uF900-\uFDCF\uFDF0-\uFFFD]/, r = new RegExp("[\\-\\.0-9" + u.source.slice(1, -1) + "\\u00B7\\u0300-\\u036F\\u203F-\\u2040]"), e = new RegExp("^" + u.source + r.source + "*(?::" + u.source + r.source + "*)?$"), a = 0, s = 1, o = 2, d = 3, g = 4, v = 5, b = 6, _ = 7;
   function k(h, x) {
     this.message = h, this.locator = x, Error.captureStackTrace && Error.captureStackTrace(this, k);
   }
@@ -4773,8 +4773,8 @@ function Yt() {
         var W = h.indexOf("<", Q);
         if (W < 0) {
           if (!h.substr(Q).match(/^\s*$/)) {
-            var Ae = T.doc, be = Ae.createTextNode(h.substr(Q));
-            Ae.appendChild(be), T.currentElement = be;
+            var Ae = T.doc, Ee = Ae.createTextNode(h.substr(Q));
+            Ae.appendChild(Ee), T.currentElement = Ee;
           }
           return;
         }
@@ -4800,11 +4800,11 @@ function Yt() {
             break;
           default:
             B && D(W);
-            var re = new M(), Ne = Y[Y.length - 1].currentNSMap, ee = b(h, W, re, Ne, c, F), Ue = re.length;
+            var re = new M(), Ne = Y[Y.length - 1].currentNSMap, ee = E(h, W, re, Ne, c, F), Ue = re.length;
             if (!re.closed && L(h, ee, re.tagName, ae) && (re.closed = !0, N.nbsp || F.warning("unclosed xml attribute")), B && Ue) {
-              for (var ze = X(B, {}), Ee = 0; Ee < Ue; Ee++) {
-                var $e = re[Ee];
-                D($e.offset), $e.locator = X(B, {});
+              for (var ze = X(B, {}), be = 0; be < Ue; be++) {
+                var Pe = re[be];
+                D(Pe.offset), Pe.locator = X(B, {});
               }
               T.locator = ze, O(re, T, Ne) && Y.push(re), T.locator = B;
             } else
@@ -4822,7 +4822,7 @@ function Yt() {
   function X(h, x) {
     return x.lineNumber = h.lineNumber, x.columnNumber = h.columnNumber, x;
   }
-  function b(h, x, N, T, F, l) {
+  function E(h, x, N, T, F, l) {
     function c(B, Y, ae) {
       N.attributeNames.hasOwnProperty(B) && l.fatalError("Attribute " + B + " redefined"), N.addValue(
         B,
@@ -4862,7 +4862,7 @@ function Yt() {
             case a:
               N.setTagName(h.slice(x, w));
             case v:
-            case E:
+            case b:
             case _:
               C = _, N.closed = !0;
             case g:
@@ -4882,7 +4882,7 @@ function Yt() {
             case a:
               N.setTagName(h.slice(x, w));
             case v:
-            case E:
+            case b:
             case _:
               break;
             case g:
@@ -4901,7 +4901,7 @@ function Yt() {
           if (U <= " ")
             switch (C) {
               case a:
-                N.setTagName(h.slice(x, w)), C = E;
+                N.setTagName(h.slice(x, w)), C = b;
                 break;
               case s:
                 p = h.slice(x, w), C = o;
@@ -4910,7 +4910,7 @@ function Yt() {
                 var D = h.slice(x, w);
                 l.warning('attribute "' + D + '" missed quot(")!!'), c(p, D, x);
               case v:
-                C = E;
+                C = b;
                 break;
             }
           else
@@ -4920,7 +4920,7 @@ function Yt() {
                 break;
               case v:
                 l.warning('attribute space is required"' + p + '"!!');
-              case E:
+              case b:
                 C = s, x = w;
                 break;
               case d:
@@ -5060,37 +5060,37 @@ function Wt() {
     return Ie;
   Tt = 1;
   var m = We(), u = qt(), r = Qt(), e = Yt(), a = u.DOMImplementation, s = m.NAMESPACE, o = e.ParseError, d = e.XMLReader;
-  function g(b) {
-    return b.replace(/\r[\n\u0085]/g, `
+  function g(E) {
+    return E.replace(/\r[\n\u0085]/g, `
 `).replace(/[\r\u0085\u2028]/g, `
 `);
   }
-  function v(b) {
-    this.options = b || { locator: {} };
+  function v(E) {
+    this.options = E || { locator: {} };
   }
-  v.prototype.parseFromString = function(b, O) {
+  v.prototype.parseFromString = function(E, O) {
     var I = this.options, L = new d(), Z = I.domBuilder || new _(), V = I.errorHandler, K = I.locator, M = I.xmlns || {}, z = /\/x?html?$/.test(O), h = z ? r.HTML_ENTITIES : r.XML_ENTITIES;
-    K && Z.setDocumentLocator(K), L.errorHandler = E(V, Z, K), L.domBuilder = I.domBuilder || Z, z && (M[""] = s.HTML), M.xml = M.xml || s.XML;
+    K && Z.setDocumentLocator(K), L.errorHandler = b(V, Z, K), L.domBuilder = I.domBuilder || Z, z && (M[""] = s.HTML), M.xml = M.xml || s.XML;
     var x = I.normalizeLineEndings || g;
-    return b && typeof b == "string" ? L.parse(
-      x(b),
+    return E && typeof E == "string" ? L.parse(
+      x(E),
       M,
       h
     ) : L.errorHandler.error("invalid doc source"), Z.doc;
   };
-  function E(b, O, I) {
-    if (!b) {
+  function b(E, O, I) {
+    if (!E) {
       if (O instanceof _)
         return O;
-      b = O;
+      E = O;
     }
-    var L = {}, Z = b instanceof Function;
+    var L = {}, Z = E instanceof Function;
     I = I || {};
     function V(K) {
-      var M = b[K];
-      !M && Z && (M = b.length == 2 ? function(z) {
-        b(K, z);
-      } : b), L[K] = M && function(z) {
+      var M = E[K];
+      !M && Z && (M = E.length == 2 ? function(z) {
+        E(K, z);
+      } : E), L[K] = M && function(z) {
         M("[xmldom " + K + "]	" + z + q(I));
       } || function() {
       };
@@ -5100,56 +5100,56 @@ function Wt() {
   function _() {
     this.cdata = !1;
   }
-  function k(b, O) {
-    O.lineNumber = b.lineNumber, O.columnNumber = b.columnNumber;
+  function k(E, O) {
+    O.lineNumber = E.lineNumber, O.columnNumber = E.columnNumber;
   }
   _.prototype = {
     startDocument: function() {
       this.doc = new a().createDocument(null, null, null), this.locator && (this.doc.documentURI = this.locator.systemId);
     },
-    startElement: function(b, O, I, L) {
-      var Z = this.doc, V = Z.createElementNS(b, I || O), K = L.length;
+    startElement: function(E, O, I, L) {
+      var Z = this.doc, V = Z.createElementNS(E, I || O), K = L.length;
       X(this, V), this.currentElement = V, this.locator && k(this.locator, V);
       for (var M = 0; M < K; M++) {
-        var b = L.getURI(M), z = L.getValue(M), I = L.getQName(M), h = Z.createAttributeNS(b, I);
+        var E = L.getURI(M), z = L.getValue(M), I = L.getQName(M), h = Z.createAttributeNS(E, I);
         this.locator && k(L.getLocator(M), h), h.value = h.nodeValue = z, V.setAttributeNode(h);
       }
     },
-    endElement: function(b, O, I) {
+    endElement: function(E, O, I) {
       var L = this.currentElement;
       L.tagName, this.currentElement = L.parentNode;
     },
-    startPrefixMapping: function(b, O) {
+    startPrefixMapping: function(E, O) {
     },
-    endPrefixMapping: function(b) {
+    endPrefixMapping: function(E) {
     },
-    processingInstruction: function(b, O) {
-      var I = this.doc.createProcessingInstruction(b, O);
+    processingInstruction: function(E, O) {
+      var I = this.doc.createProcessingInstruction(E, O);
       this.locator && k(this.locator, I), X(this, I);
     },
-    ignorableWhitespace: function(b, O, I) {
+    ignorableWhitespace: function(E, O, I) {
     },
-    characters: function(b, O, I) {
-      if (b = J.apply(this, arguments), b) {
+    characters: function(E, O, I) {
+      if (E = J.apply(this, arguments), E) {
         if (this.cdata)
-          var L = this.doc.createCDATASection(b);
+          var L = this.doc.createCDATASection(E);
         else
-          var L = this.doc.createTextNode(b);
-        this.currentElement ? this.currentElement.appendChild(L) : /^\s*$/.test(b) && this.doc.appendChild(L), this.locator && k(this.locator, L);
+          var L = this.doc.createTextNode(E);
+        this.currentElement ? this.currentElement.appendChild(L) : /^\s*$/.test(E) && this.doc.appendChild(L), this.locator && k(this.locator, L);
       }
     },
-    skippedEntity: function(b) {
+    skippedEntity: function(E) {
     },
     endDocument: function() {
       this.doc.normalize();
     },
-    setDocumentLocator: function(b) {
-      (this.locator = b) && (b.lineNumber = 0);
+    setDocumentLocator: function(E) {
+      (this.locator = E) && (E.lineNumber = 0);
     },
     //LexicalHandler
-    comment: function(b, O, I) {
-      b = J.apply(this, arguments);
-      var L = this.doc.createComment(b);
+    comment: function(E, O, I) {
+      E = J.apply(this, arguments);
+      var L = this.doc.createComment(E);
       this.locator && k(this.locator, L), X(this, L);
     },
     startCDATA: function() {
@@ -5158,10 +5158,10 @@ function Wt() {
     endCDATA: function() {
       this.cdata = !1;
     },
-    startDTD: function(b, O, I) {
+    startDTD: function(E, O, I) {
       var L = this.doc.implementation;
       if (L && L.createDocumentType) {
-        var Z = L.createDocumentType(b, O, I);
+        var Z = L.createDocumentType(E, O, I);
         this.locator && k(this.locator, Z), X(this, Z), this.doc.doctype = Z;
       }
     },
@@ -5169,31 +5169,31 @@ function Wt() {
      * @see org.xml.sax.ErrorHandler
      * @link http://www.saxproject.org/apidoc/org/xml/sax/ErrorHandler.html
      */
-    warning: function(b) {
-      console.warn("[xmldom warning]	" + b, q(this.locator));
+    warning: function(E) {
+      console.warn("[xmldom warning]	" + E, q(this.locator));
     },
-    error: function(b) {
-      console.error("[xmldom error]	" + b, q(this.locator));
+    error: function(E) {
+      console.error("[xmldom error]	" + E, q(this.locator));
     },
-    fatalError: function(b) {
-      throw new o(b, this.locator);
+    fatalError: function(E) {
+      throw new o(E, this.locator);
     }
   };
-  function q(b) {
-    if (b)
+  function q(E) {
+    if (E)
       return `
-@` + (b.systemId || "") + "#[line:" + b.lineNumber + ",col:" + b.columnNumber + "]";
+@` + (E.systemId || "") + "#[line:" + E.lineNumber + ",col:" + E.columnNumber + "]";
   }
-  function J(b, O, I) {
-    return typeof b == "string" ? b.substr(O, I) : b.length >= O + I || O ? new java.lang.String(b, O, I) + "" : b;
+  function J(E, O, I) {
+    return typeof E == "string" ? E.substr(O, I) : E.length >= O + I || O ? new java.lang.String(E, O, I) + "" : E;
   }
-  "endDTD,startEntity,endEntity,attributeDecl,elementDecl,externalEntityDecl,internalEntityDecl,resolveEntity,getExternalSubset,notationDecl,unparsedEntityDecl".replace(/\w+/g, function(b) {
-    _.prototype[b] = function() {
+  "endDTD,startEntity,endEntity,attributeDecl,elementDecl,externalEntityDecl,internalEntityDecl,resolveEntity,getExternalSubset,notationDecl,unparsedEntityDecl".replace(/\w+/g, function(E) {
+    _.prototype[E] = function() {
       return null;
     };
   });
-  function X(b, O) {
-    b.currentElement ? b.currentElement.appendChild(O) : b.doc.appendChild(O);
+  function X(E, O) {
+    E.currentElement ? E.currentElement.appendChild(O) : E.doc.appendChild(O);
   }
   return Ie.__DOMHandler = _, Ie.normalizeLineEndings = g, Ie.DOMParser = v, Ie;
 }
@@ -5242,7 +5242,7 @@ function Jt() {
       function v(l) {
         return l.prefix;
       }
-      function E(l) {
+      function b(l) {
         return typeof l == "string" ? l.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#x27;") : l;
       }
       function _(l) {
@@ -5309,7 +5309,7 @@ function Jt() {
         }
         return c;
       }
-      function b(l, c) {
+      function E(l, c) {
         var p = {};
         p.__cnt = 0;
         for (var D = l.childNodes, w = 0; w < D.length; w++) {
@@ -5332,14 +5332,14 @@ function Jt() {
         }), p);
       }
       function O(l, c) {
-        return l.nodeType === d.DOCUMENT_NODE ? X(l) : l.nodeType === d.ELEMENT_NODE ? b(l, c) : l.nodeType === d.TEXT_NODE || l.nodeType === d.CDATA_SECTION_NODE ? l.nodeValue : null;
+        return l.nodeType === d.DOCUMENT_NODE ? X(l) : l.nodeType === d.ELEMENT_NODE ? E(l, c) : l.nodeType === d.TEXT_NODE || l.nodeType === d.CDATA_SECTION_NODE ? l.nodeValue : null;
       }
       function I(l, c, p, D) {
         var w = "<" + (l && l.__prefix ? l.__prefix + ":" : "") + c;
         if (p)
           for (var C = 0; C < p.length; C++) {
             var U = p[C], B = l[U];
-            e.escapeMode && (B = E(B)), w += " " + U.substr(e.attributePrefix.length) + "=", e.useDoubleQuotes ? w += '"' + B + '"' : w += "'" + B + "'";
+            e.escapeMode && (B = b(B)), w += " " + U.substr(e.attributePrefix.length) + "=", e.useDoubleQuotes ? w += '"' + B + '"' : w += "'" + B + "'";
           }
         return D ? w += " />" : w += ">", w;
       }
@@ -5368,11 +5368,11 @@ function Jt() {
       }
       function z(l) {
         var c = "";
-        return l.__cdata && (c += "<![CDATA[" + l.__cdata + "]]>"), (l.__text || typeof l.__text == "number" || typeof l.__text == "boolean") && (e.escapeMode ? c += E(l.__text) : c += l.__text), c;
+        return l.__cdata && (c += "<![CDATA[" + l.__cdata + "]]>"), (l.__text || typeof l.__text == "number" || typeof l.__text == "boolean") && (e.escapeMode ? c += b(l.__text) : c += l.__text), c;
       }
       function h(l) {
         var c = "";
-        return l instanceof Object ? c += z(l) : l !== null && (e.escapeMode ? c += E(l) : c += l), c;
+        return l instanceof Object ? c += z(l) : l !== null && (e.escapeMode ? c += b(l) : c += l), c;
       }
       function x(l, c, p) {
         var D = "";
@@ -5495,12 +5495,12 @@ class rr extends HTMLElement {
         let u = this.attributes.src;
         typeof u != "string" && (u = this.attributes.src.value);
         const r = new URL(u.replace("https:/", "https://wp-now-corsproxy.rhildred.workers.dev/corsproxy")), a = await (await fetch(r)).text();
-        if (this.innerHTML = $(a), window.frameElement) {
+        if (this.innerHTML = P(a), window.frameElement) {
           const s = window.frameElement;
           s.width = s.contentWindow.document.body.scrollWidth + 50, s.height = s.contentWindow.document.body.scrollHeight + 50;
         }
       } else
-        this.innerHTML = $(this.innerHTML);
+        this.innerHTML = P(this.innerHTML);
     }
   }
 }
@@ -5510,7 +5510,11 @@ class ur extends HTMLElement {
     super();
   }
   async connectedCallback() {
-    this.ariaExpanded || (this.ariaExpanded = !0, this.innerHTML = "Rich was here");
+    if (!this.ariaExpanded) {
+      this.ariaExpanded = !0;
+      const r = window.parent.API.Activity.ItemIdentifier.split("/"), a = (["https:/", "github.com"] + r.slice(0, 2) + ["raw", "main"] + r.slice(3) + ["slides.Rmd"]).join("/");
+      this.innerHTML = `<x-markdown2html src="${a}"></x-markdown2html>`;
+    }
   }
 }
 customElements.define("x-scorm", ur);
