@@ -5473,7 +5473,7 @@ function Bt(m) {
 }
 async function rr(m) {
   const r = m.split("/");
-  let u = ["https:/", "rhildred.github.io"].concat(r.slice(0, 2)).concat(r.slice(2)).concat(["slides.Rmd"]);
+  let u = ["https:/", "rhildred.github.io"].concat(r.slice(0, 2)).concat(r.slice(2)).concat(["slides.html"]);
   console.log(u);
   const e = u.join("/");
   return await (await fetch(e)).text();
