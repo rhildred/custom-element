@@ -174,7 +174,7 @@ function St() {
     }
     i.constructor != t && (typeof t != "function" && console.error("unknown Class:" + t), i.constructor = t);
   }
-  var b = {}, _ = b.ELEMENT_NODE = 1, k = b.ATTRIBUTE_NODE = 2, q = b.TEXT_NODE = 3, J = b.CDATA_SECTION_NODE = 4, X = b.ENTITY_REFERENCE_NODE = 5, E = b.ENTITY_NODE = 6, O = b.PROCESSING_INSTRUCTION_NODE = 7, I = b.COMMENT_NODE = 8, L = b.DOCUMENT_NODE = 9, Z = b.DOCUMENT_TYPE_NODE = 10, P = b.DOCUMENT_FRAGMENT_NODE = 11, K = b.NOTATION_NODE = 12, M = {}, z = {};
+  var b = {}, _ = b.ELEMENT_NODE = 1, k = b.ATTRIBUTE_NODE = 2, q = b.TEXT_NODE = 3, J = b.CDATA_SECTION_NODE = 4, X = b.ENTITY_REFERENCE_NODE = 5, E = b.ENTITY_NODE = 6, O = b.PROCESSING_INSTRUCTION_NODE = 7, I = b.COMMENT_NODE = 8, L = b.DOCUMENT_NODE = 9, Z = b.DOCUMENT_TYPE_NODE = 10, V = b.DOCUMENT_FRAGMENT_NODE = 11, K = b.NOTATION_NODE = 12, M = {}, z = {};
   M.INDEX_SIZE_ERR = (z[1] = "Index size error", 1), M.DOMSTRING_SIZE_ERR = (z[2] = "DOMString size error", 2);
   var h = M.HIERARCHY_REQUEST_ERR = (z[3] = "Hierarchy request error", 3);
   M.WRONG_DOCUMENT_ERR = (z[4] = "Wrong document", 4), M.INVALID_CHARACTER_ERR = (z[5] = "Invalid character", 5), M.NO_DATA_ALLOWED_ERR = (z[6] = "No data allowed", 6), M.NO_MODIFICATION_ALLOWED_ERR = (z[7] = "No modification allowed", 7);
@@ -625,7 +625,7 @@ function St() {
   function be(t, n, i, f) {
     ee(t, n, i), t.nodeType === B.DOCUMENT_NODE && (f || Ue)(t, n, i);
     var A = n.parentNode;
-    if (A && A.removeChild(n), n.nodeType === P) {
+    if (A && A.removeChild(n), n.nodeType === V) {
       var R = n.firstChild;
       if (R == null)
         return n;
@@ -637,7 +637,7 @@ function St() {
     do
       R.parentNode = t;
     while (R !== H && (R = R.nextSibling));
-    return Ee(t.ownerDocument || t, t), n.nodeType == P && (n.firstChild = n.lastChild = null), n;
+    return Ee(t.ownerDocument || t, t), n.nodeType == V && (n.firstChild = n.lastChild = null), n;
   }
   function $e(t, n) {
     return n.parentNode && n.parentNode.removeChild(n), n.parentNode = t, n.previousSibling = t.lastChild, n.nextSibling = null, n.previousSibling ? n.previousSibling.nextSibling = n : t.firstChild = n, t.lastChild = n, Ee(t.ownerDocument, t, n), n;
@@ -656,7 +656,7 @@ function St() {
     documentElement: null,
     _inc: 1,
     insertBefore: function(t, n) {
-      if (t.nodeType == P) {
+      if (t.nodeType == V) {
         for (var i = t.firstChild; i; ) {
           var f = i.nextSibling;
           this.insertBefore(i, n), i = f;
@@ -721,7 +721,7 @@ function St() {
     },
     //document factory method:
     createElement: function(t) {
-      var n = new V();
+      var n = new j();
       n.ownerDocument = this, n.nodeName = t, n.tagName = t, n.localName = t, n.childNodes = new F();
       var i = n.attributes = new p();
       return i._ownerElement = n, n;
@@ -756,7 +756,7 @@ function St() {
     },
     // Introduced in DOM Level 2:
     createElementNS: function(t, n) {
-      var i = new V(), f = n.split(":"), A = i.attributes = new p();
+      var i = new j(), f = n.split(":"), A = i.attributes = new p();
       return i.childNodes = new F(), i.ownerDocument = this, i.nodeName = n, i.tagName = n, i.namespaceURI = t, f.length == 2 ? (i.prefix = f[0], i.localName = f[1]) : i.localName = n, A._ownerElement = i, i;
     },
     // Introduced in DOM Level 2:
@@ -765,10 +765,10 @@ function St() {
       return i.ownerDocument = this, i.nodeName = n, i.name = n, i.namespaceURI = t, i.specified = !0, f.length == 2 ? (i.prefix = f[0], i.localName = f[1]) : i.localName = n, i;
     }
   }, x(Q, B);
-  function V() {
+  function j() {
     this._nsMap = {};
   }
-  V.prototype = {
+  j.prototype = {
     nodeType: _,
     hasAttribute: function(t) {
       return this.getAttributeNode(t) != null;
@@ -790,7 +790,7 @@ function St() {
     },
     //four real opeartion method
     appendChild: function(t) {
-      return t.nodeType === P ? this.insertBefore(t, null) : $e(this, t);
+      return t.nodeType === V ? this.insertBefore(t, null) : $e(this, t);
     },
     setAttributeNode: function(t) {
       return this.attributes.setNamedItem(t);
@@ -836,7 +836,7 @@ function St() {
         }), f;
       });
     }
-  }, Q.prototype.getElementsByTagName = V.prototype.getElementsByTagName, Q.prototype.getElementsByTagNameNS = V.prototype.getElementsByTagNameNS, x(V, B);
+  }, Q.prototype.getElementsByTagName = j.prototype.getElementsByTagName, Q.prototype.getElementsByTagNameNS = j.prototype.getElementsByTagNameNS, x(j, B);
   function te() {
   }
   te.prototype.nodeType = k, x(te, B);
@@ -902,7 +902,7 @@ function St() {
   tt.prototype.nodeType = X, x(tt, B);
   function Ve() {
   }
-  Ve.prototype.nodeName = "#document-fragment", Ve.prototype.nodeType = P, x(Ve, B);
+  Ve.prototype.nodeName = "#document-fragment", Ve.prototype.nodeType = V, x(Ve, B);
   function rt() {
   }
   rt.prototype.nodeType = O, x(rt, B);
@@ -1003,7 +1003,7 @@ function St() {
           n.push("/>");
         return;
       case L:
-      case P:
+      case V:
         for (var ue = t.firstChild; ue; )
           Se(ue, n, i, f, A.slice()), ue = ue.nextSibling;
         return;
@@ -1041,7 +1041,7 @@ function St() {
     switch (n.nodeType) {
       case _:
         f = n.cloneNode(!1), f.ownerDocument = t;
-      case P:
+      case V:
         break;
       case k:
         i = !0;
@@ -1082,7 +1082,7 @@ function St() {
       let t = function(n) {
         switch (n.nodeType) {
           case _:
-          case P:
+          case V:
             var i = [];
             for (n = n.firstChild; n; )
               n.nodeType !== 7 && n.nodeType !== 8 && i.push(t(n)), n = n.nextSibling;
@@ -1103,7 +1103,7 @@ function St() {
         set: function(n) {
           switch (this.nodeType) {
             case _:
-            case P:
+            case V:
               for (; this.firstChild; )
                 this.removeChild(this.firstChild);
               (n || String(n)) && this.appendChild(this.ownerDocument.createTextNode(n));
@@ -1118,7 +1118,7 @@ function St() {
     }
   } catch {
   }
-  return me.DocumentType = Pe, me.DOMException = T, me.DOMImplementation = U, me.Element = V, me.Node = B, me.NodeList = F, me.XMLSerializer = ht, me;
+  return me.DocumentType = Pe, me.DOMException = T, me.DOMImplementation = U, me.Element = j, me.Node = B, me.NodeList = F, me.XMLSerializer = ht, me;
 }
 var Ie = {}, st = {}, xt;
 function $t() {
@@ -3285,28 +3285,28 @@ function Pt() {
     }
   };
   function J(h, v, N, T, F) {
-    function l(V) {
-      if (V > 65535) {
-        V -= 65536;
-        var te = 55296 + (V >> 10), we = 56320 + (V & 1023);
+    function l(j) {
+      if (j > 65535) {
+        j -= 65536;
+        var te = 55296 + (j >> 10), we = 56320 + (j & 1023);
         return String.fromCharCode(te, we);
       } else
-        return String.fromCharCode(V);
+        return String.fromCharCode(j);
     }
-    function c(V) {
-      var te = V.slice(1, -1);
-      return Object.hasOwnProperty.call(N, te) ? N[te] : te.charAt(0) === "#" ? l(parseInt(te.substr(1).replace("x", "0x"))) : (F.error("entity not found:" + V), V);
+    function c(j) {
+      var te = j.slice(1, -1);
+      return Object.hasOwnProperty.call(N, te) ? N[te] : te.charAt(0) === "#" ? l(parseInt(te.substr(1).replace("x", "0x"))) : (F.error("entity not found:" + j), j);
     }
-    function p(V) {
-      if (V > Q) {
-        var te = h.substring(Q, V).replace(/&#?\w+;/g, c);
-        B && m(Q), T.characters(te, 0, V - Q), Q = V;
+    function p(j) {
+      if (j > Q) {
+        var te = h.substring(Q, j).replace(/&#?\w+;/g, c);
+        B && m(Q), T.characters(te, 0, j - Q), Q = j;
       }
     }
-    function m(V, te) {
-      for (; V >= C && (te = U.exec(h)); )
+    function m(j, te) {
+      for (; j >= C && (te = U.exec(h)); )
         w = te.index, C = w + te[0].length, B.lineNumber++;
-      B.columnNumber = V - w + 1;
+      B.columnNumber = j - w + 1;
     }
     for (var w = 0, C = 0, U = /.*(?:\r\n?|\n)|.*$/g, B = T.locator, Y = [{ currentNSMap: v }], ae = {}, Q = 0; ; ) {
       try {
@@ -3336,7 +3336,7 @@ function Pt() {
             B && m(W), ee = K(h, W, T);
             break;
           case "!":
-            B && m(W), ee = P(h, W, T, F);
+            B && m(W), ee = V(h, W, T, F);
             break;
           default:
             B && m(W);
@@ -3351,10 +3351,10 @@ function Pt() {
               O(re, T, Ne) && Y.push(re);
             D.isHTML(re.uri) && !re.closed ? ee = I(h, ee, re.tagName, c, T) : ee++;
         }
-      } catch (V) {
-        if (V instanceof k)
-          throw V;
-        F.error("element parse error: " + V), ee = -1;
+      } catch (j) {
+        if (j instanceof k)
+          throw j;
+        F.error("element parse error: " + j), ee = -1;
       }
       ee > Q ? Q = ee : p(Math.max(W, Q) + 1);
     }
@@ -3513,7 +3513,7 @@ function Pt() {
     for (var N in h)
       Object.prototype.hasOwnProperty.call(h, N) && (v[N] = h[N]);
   }
-  function P(h, v, N, T) {
+  function V(h, v, N, T) {
     var F = h.charAt(v + 2);
     switch (F) {
       case "-":
@@ -3609,8 +3609,8 @@ function Vt() {
     this.options = E || { locator: {} };
   }
   x.prototype.parseFromString = function(E, O) {
-    var I = this.options, L = new d(), Z = I.domBuilder || new _(), P = I.errorHandler, K = I.locator, M = I.xmlns || {}, z = /\/x?html?$/.test(O), h = z ? r.HTML_ENTITIES : r.XML_ENTITIES;
-    K && Z.setDocumentLocator(K), L.errorHandler = b(P, Z, K), L.domBuilder = I.domBuilder || Z, z && (M[""] = s.HTML), M.xml = M.xml || s.XML;
+    var I = this.options, L = new d(), Z = I.domBuilder || new _(), V = I.errorHandler, K = I.locator, M = I.xmlns || {}, z = /\/x?html?$/.test(O), h = z ? r.HTML_ENTITIES : r.XML_ENTITIES;
+    K && Z.setDocumentLocator(K), L.errorHandler = b(V, Z, K), L.domBuilder = I.domBuilder || Z, z && (M[""] = s.HTML), M.xml = M.xml || s.XML;
     var v = I.normalizeLineEndings || g;
     return E && typeof E == "string" ? L.parse(
       v(E),
@@ -3626,7 +3626,7 @@ function Vt() {
     }
     var L = {}, Z = E instanceof Function;
     I = I || {};
-    function P(K) {
+    function V(K) {
       var M = E[K];
       !M && Z && (M = E.length == 2 ? function(z) {
         E(K, z);
@@ -3635,7 +3635,7 @@ function Vt() {
       } || function() {
       };
     }
-    return P("warning"), P("error"), P("fatalError"), L;
+    return V("warning"), V("error"), V("fatalError"), L;
   }
   function _() {
     this.cdata = !1;
@@ -3648,11 +3648,11 @@ function Vt() {
       this.doc = new a().createDocument(null, null, null), this.locator && (this.doc.documentURI = this.locator.systemId);
     },
     startElement: function(E, O, I, L) {
-      var Z = this.doc, P = Z.createElementNS(E, I || O), K = L.length;
-      X(this, P), this.currentElement = P, this.locator && k(this.locator, P);
+      var Z = this.doc, V = Z.createElementNS(E, I || O), K = L.length;
+      X(this, V), this.currentElement = V, this.locator && k(this.locator, V);
       for (var M = 0; M < K; M++) {
         var E = L.getURI(M), z = L.getValue(M), I = L.getQName(M), h = Z.createAttributeNS(E, I);
-        this.locator && k(L.getLocator(M), h), h.value = h.nodeValue = z, P.setAttributeNode(h);
+        this.locator && k(L.getLocator(M), h), h.value = h.nodeValue = z, V.setAttributeNode(h);
       }
     },
     endElement: function(E, O, I) {
@@ -3889,14 +3889,14 @@ function jt() {
       function Z(l, c) {
         return l.indexOf(c, l.length - c.length) !== -1;
       }
-      function P(l, c) {
+      function V(l, c) {
         return !!(e.arrayAccessForm === "property" && Z(c.toString(), "_asArray") || c.toString().indexOf(e.attributePrefix) === 0 || c.toString().indexOf("__") === 0 || l[c] instanceof Function);
       }
       function K(l) {
         var c = 0;
         if (l instanceof Object)
           for (var p in l)
-            P(l, p) || c++;
+            V(l, p) || c++;
         return c;
       }
       function M(l) {
@@ -3946,7 +3946,7 @@ function jt() {
         var c = "", p = K(l);
         if (p > 0) {
           for (var m in l)
-            if (!P(l, m)) {
+            if (!V(l, m)) {
               var w = l[m], C = M(w);
               c += N(w, m, C);
             }
@@ -4041,7 +4041,7 @@ function Wt(D) {
   return D.replace(Yt, (u, r) => (r = r.toLowerCase(), r === "colon" ? ":" : r.charAt(0) === "#" ? r.charAt(1) === "x" ? String.fromCharCode(parseInt(r.substring(2), 16)) : String.fromCharCode(+r.substring(1)) : ""));
 }
 const Jt = /(^|[^\[])\^/g;
-function $(D, u) {
+function P(D, u) {
   D = typeof D == "string" ? D : D.source, u = u || "";
   const r = {
     replace: (e, a) => (a = typeof a == "object" && "source" in a ? a.source : a, a = a.replace(Jt, "$1"), D = D.replace(e, a), r),
@@ -4252,9 +4252,9 @@ class Ze {
 `, u = u.substring(k.length + 1), b = !0), !b) {
           const O = new RegExp(`^ {0,${Math.min(3, q - 1)}}(?:[*+-]|\\d{1,9}[.)])((?:[ 	][^\\n]*)?(?:\\n|$))`), I = new RegExp(`^ {0,${Math.min(3, q - 1)}}((?:- *){3,}|(?:_ *){3,}|(?:\\* *){3,})(?:\\n+|$)`), L = new RegExp(`^ {0,${Math.min(3, q - 1)}}(?:\`\`\`|~~~)`), Z = new RegExp(`^ {0,${Math.min(3, q - 1)}}#`);
           for (; u; ) {
-            const P = u.split(`
+            const V = u.split(`
 `, 1)[0];
-            if (k = P, this.options.pedantic && (k = k.replace(/^ {1,4}(?=( {4})*[^ ])/g, "  ")), L.test(k) || Z.test(k) || O.test(k) || I.test(u))
+            if (k = V, this.options.pedantic && (k = k.replace(/^ {1,4}(?=( {4})*[^ ])/g, "  ")), L.test(k) || Z.test(k) || O.test(k) || I.test(u))
               break;
             if (k.search(/[^ ]/) >= q || !k.trim())
               g += `
@@ -4265,8 +4265,8 @@ class Ze {
               g += `
 ` + k;
             }
-            !J && !k.trim() && (J = !0), d += P + `
-`, u = u.substring(P.length + 1), _ = k.slice(q);
+            !J && !k.trim() && (J = !0), d += V + `
+`, u = u.substring(V.length + 1), _ = k.slice(q);
           }
         }
         s.loose || (x ? s.loose = !0 : /\n *\n *$/.test(d) && (x = !0));
@@ -4595,32 +4595,32 @@ const S = {
 };
 S._label = /(?!\s*\])(?:\\.|[^\[\]\\])+/;
 S._title = /(?:"(?:\\"?|[^"\\])*"|'[^'\n]*(?:\n[^'\n]+)*\n?'|\([^()]*\))/;
-S.def = $(S.def).replace("label", S._label).replace("title", S._title).getRegex();
+S.def = P(S.def).replace("label", S._label).replace("title", S._title).getRegex();
 S.bullet = /(?:[*+-]|\d{1,9}[.)])/;
-S.listItemStart = $(/^( *)(bull) */).replace("bull", S.bullet).getRegex();
-S.list = $(S.list).replace(/bull/g, S.bullet).replace("hr", "\\n+(?=\\1?(?:(?:- *){3,}|(?:_ *){3,}|(?:\\* *){3,})(?:\\n+|$))").replace("def", "\\n+(?=" + S.def.source + ")").getRegex();
+S.listItemStart = P(/^( *)(bull) */).replace("bull", S.bullet).getRegex();
+S.list = P(S.list).replace(/bull/g, S.bullet).replace("hr", "\\n+(?=\\1?(?:(?:- *){3,}|(?:_ *){3,}|(?:\\* *){3,})(?:\\n+|$))").replace("def", "\\n+(?=" + S.def.source + ")").getRegex();
 S._tag = "address|article|aside|base|basefont|blockquote|body|caption|center|col|colgroup|dd|details|dialog|dir|div|dl|dt|fieldset|figcaption|figure|footer|form|frame|frameset|h[1-6]|head|header|hr|html|iframe|legend|li|link|main|menu|menuitem|meta|nav|noframes|ol|optgroup|option|p|param|section|source|summary|table|tbody|td|tfoot|th|thead|title|tr|track|ul";
 S._comment = /<!--(?!-?>)[\s\S]*?(?:-->|$)/;
-S.html = $(S.html, "i").replace("comment", S._comment).replace("tag", S._tag).replace("attribute", / +[a-zA-Z:_][\w.:-]*(?: *= *"[^"\n]*"| *= *'[^'\n]*'| *= *[^\s"'=<>`]+)?/).getRegex();
-S.lheading = $(S.lheading).replace(/bull/g, S.bullet).getRegex();
-S.paragraph = $(S._paragraph).replace("hr", S.hr).replace("heading", " {0,3}#{1,6}(?:\\s|$)").replace("|lheading", "").replace("|table", "").replace("blockquote", " {0,3}>").replace("fences", " {0,3}(?:`{3,}(?=[^`\\n]*\\n)|~{3,})[^\\n]*\\n").replace("list", " {0,3}(?:[*+-]|1[.)]) ").replace("html", "</?(?:tag)(?: +|\\n|/?>)|<(?:script|pre|style|textarea|!--)").replace("tag", S._tag).getRegex();
-S.blockquote = $(S.blockquote).replace("paragraph", S.paragraph).getRegex();
+S.html = P(S.html, "i").replace("comment", S._comment).replace("tag", S._tag).replace("attribute", / +[a-zA-Z:_][\w.:-]*(?: *= *"[^"\n]*"| *= *'[^'\n]*'| *= *[^\s"'=<>`]+)?/).getRegex();
+S.lheading = P(S.lheading).replace(/bull/g, S.bullet).getRegex();
+S.paragraph = P(S._paragraph).replace("hr", S.hr).replace("heading", " {0,3}#{1,6}(?:\\s|$)").replace("|lheading", "").replace("|table", "").replace("blockquote", " {0,3}>").replace("fences", " {0,3}(?:`{3,}(?=[^`\\n]*\\n)|~{3,})[^\\n]*\\n").replace("list", " {0,3}(?:[*+-]|1[.)]) ").replace("html", "</?(?:tag)(?: +|\\n|/?>)|<(?:script|pre|style|textarea|!--)").replace("tag", S._tag).getRegex();
+S.blockquote = P(S.blockquote).replace("paragraph", S.paragraph).getRegex();
 S.normal = { ...S };
 S.gfm = {
   ...S.normal,
   table: "^ *([^\\n ].*)\\n {0,3}((?:\\| *)?:?-+:? *(?:\\| *:?-+:? *)*(?:\\| *)?)(?:\\n((?:(?! *\\n|hr|heading|blockquote|code|fences|list|html).*(?:\\n|$))*)\\n*|$)"
   // Cells
 };
-S.gfm.table = $(S.gfm.table).replace("hr", S.hr).replace("heading", " {0,3}#{1,6}(?:\\s|$)").replace("blockquote", " {0,3}>").replace("code", " {4}[^\\n]").replace("fences", " {0,3}(?:`{3,}(?=[^`\\n]*\\n)|~{3,})[^\\n]*\\n").replace("list", " {0,3}(?:[*+-]|1[.)]) ").replace("html", "</?(?:tag)(?: +|\\n|/?>)|<(?:script|pre|style|textarea|!--)").replace("tag", S._tag).getRegex();
-S.gfm.paragraph = $(S._paragraph).replace("hr", S.hr).replace("heading", " {0,3}#{1,6}(?:\\s|$)").replace("|lheading", "").replace("table", S.gfm.table).replace("blockquote", " {0,3}>").replace("fences", " {0,3}(?:`{3,}(?=[^`\\n]*\\n)|~{3,})[^\\n]*\\n").replace("list", " {0,3}(?:[*+-]|1[.)]) ").replace("html", "</?(?:tag)(?: +|\\n|/?>)|<(?:script|pre|style|textarea|!--)").replace("tag", S._tag).getRegex();
+S.gfm.table = P(S.gfm.table).replace("hr", S.hr).replace("heading", " {0,3}#{1,6}(?:\\s|$)").replace("blockquote", " {0,3}>").replace("code", " {4}[^\\n]").replace("fences", " {0,3}(?:`{3,}(?=[^`\\n]*\\n)|~{3,})[^\\n]*\\n").replace("list", " {0,3}(?:[*+-]|1[.)]) ").replace("html", "</?(?:tag)(?: +|\\n|/?>)|<(?:script|pre|style|textarea|!--)").replace("tag", S._tag).getRegex();
+S.gfm.paragraph = P(S._paragraph).replace("hr", S.hr).replace("heading", " {0,3}#{1,6}(?:\\s|$)").replace("|lheading", "").replace("table", S.gfm.table).replace("blockquote", " {0,3}>").replace("fences", " {0,3}(?:`{3,}(?=[^`\\n]*\\n)|~{3,})[^\\n]*\\n").replace("list", " {0,3}(?:[*+-]|1[.)]) ").replace("html", "</?(?:tag)(?: +|\\n|/?>)|<(?:script|pre|style|textarea|!--)").replace("tag", S._tag).getRegex();
 S.pedantic = {
   ...S.normal,
-  html: $(`^ *(?:comment *(?:\\n|\\s*$)|<(tag)[\\s\\S]+?</\\1> *(?:\\n{2,}|\\s*$)|<tag(?:"[^"]*"|'[^']*'|\\s[^'"/>\\s]*)*?/?> *(?:\\n{2,}|\\s*$))`).replace("comment", S._comment).replace(/tag/g, "(?!(?:a|em|strong|small|s|cite|q|dfn|abbr|data|time|code|var|samp|kbd|sub|sup|i|b|u|mark|ruby|rt|rp|bdi|bdo|span|br|wbr|ins|del|img)\\b)\\w+(?!:|[^\\w\\s@]*@)\\b").getRegex(),
+  html: P(`^ *(?:comment *(?:\\n|\\s*$)|<(tag)[\\s\\S]+?</\\1> *(?:\\n{2,}|\\s*$)|<tag(?:"[^"]*"|'[^']*'|\\s[^'"/>\\s]*)*?/?> *(?:\\n{2,}|\\s*$))`).replace("comment", S._comment).replace(/tag/g, "(?!(?:a|em|strong|small|s|cite|q|dfn|abbr|data|time|code|var|samp|kbd|sub|sup|i|b|u|mark|ruby|rt|rp|bdi|bdo|span|br|wbr|ins|del|img)\\b)\\w+(?!:|[^\\w\\s@]*@)\\b").getRegex(),
   def: /^ *\[([^\]]+)\]: *<?([^\s>]+)>?(?: +(["(][^\n]+[")]))? *(?:\n+|$)/,
   heading: /^(#{1,6})(.*)(?:\n+|$)/,
   fences: Xe,
   lheading: /^(.+?)\n {0,3}(=+|-+) *(?:\n+|$)/,
-  paragraph: $(S.normal._paragraph).replace("hr", S.hr).replace("heading", ` *#{1,6} *[^
+  paragraph: P(S.normal._paragraph).replace("hr", S.hr).replace("heading", ` *#{1,6} *[^
 ]`).replace("lheading", S.lheading).replace("blockquote", " {0,3}>").replace("|fences", "").replace("|list", "").replace("|html", "").getRegex()
 };
 const y = {
@@ -4647,28 +4647,28 @@ const y = {
   punctuation: /^((?![*_])[\spunctuation])/
 };
 y._punctuation = "\\p{P}$+<=>`^|~";
-y.punctuation = $(y.punctuation, "u").replace(/punctuation/g, y._punctuation).getRegex();
+y.punctuation = P(y.punctuation, "u").replace(/punctuation/g, y._punctuation).getRegex();
 y.blockSkip = /\[[^[\]]*?\]\([^\(\)]*?\)|`[^`]*?`|<[^<>]*?>/g;
 y.anyPunctuation = /\\[punct]/g;
 y._escapes = /\\([punct])/g;
-y._comment = $(S._comment).replace("(?:-->|$)", "-->").getRegex();
-y.emStrong.lDelim = $(y.emStrong.lDelim, "u").replace(/punct/g, y._punctuation).getRegex();
-y.emStrong.rDelimAst = $(y.emStrong.rDelimAst, "gu").replace(/punct/g, y._punctuation).getRegex();
-y.emStrong.rDelimUnd = $(y.emStrong.rDelimUnd, "gu").replace(/punct/g, y._punctuation).getRegex();
-y.anyPunctuation = $(y.anyPunctuation, "gu").replace(/punct/g, y._punctuation).getRegex();
-y._escapes = $(y._escapes, "gu").replace(/punct/g, y._punctuation).getRegex();
+y._comment = P(S._comment).replace("(?:-->|$)", "-->").getRegex();
+y.emStrong.lDelim = P(y.emStrong.lDelim, "u").replace(/punct/g, y._punctuation).getRegex();
+y.emStrong.rDelimAst = P(y.emStrong.rDelimAst, "gu").replace(/punct/g, y._punctuation).getRegex();
+y.emStrong.rDelimUnd = P(y.emStrong.rDelimUnd, "gu").replace(/punct/g, y._punctuation).getRegex();
+y.anyPunctuation = P(y.anyPunctuation, "gu").replace(/punct/g, y._punctuation).getRegex();
+y._escapes = P(y._escapes, "gu").replace(/punct/g, y._punctuation).getRegex();
 y._scheme = /[a-zA-Z][a-zA-Z0-9+.-]{1,31}/;
 y._email = /[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+(@)[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+(?![-_])/;
-y.autolink = $(y.autolink).replace("scheme", y._scheme).replace("email", y._email).getRegex();
+y.autolink = P(y.autolink).replace("scheme", y._scheme).replace("email", y._email).getRegex();
 y._attribute = /\s+[a-zA-Z:_][\w.:-]*(?:\s*=\s*"[^"]*"|\s*=\s*'[^']*'|\s*=\s*[^\s"'=<>`]+)?/;
-y.tag = $(y.tag).replace("comment", y._comment).replace("attribute", y._attribute).getRegex();
+y.tag = P(y.tag).replace("comment", y._comment).replace("attribute", y._attribute).getRegex();
 y._label = /(?:\[(?:\\.|[^\[\]\\])*\]|\\.|`[^`]*`|[^\[\]\\`])*?/;
 y._href = /<(?:\\.|[^\n<>\\])+>|[^\s\x00-\x1f]*/;
 y._title = /"(?:\\"?|[^"\\])*"|'(?:\\'?|[^'\\])*'|\((?:\\\)?|[^)\\])*\)/;
-y.link = $(y.link).replace("label", y._label).replace("href", y._href).replace("title", y._title).getRegex();
-y.reflink = $(y.reflink).replace("label", y._label).replace("ref", S._label).getRegex();
-y.nolink = $(y.nolink).replace("ref", S._label).getRegex();
-y.reflinkSearch = $(y.reflinkSearch, "g").replace("reflink", y.reflink).replace("nolink", y.nolink).getRegex();
+y.link = P(y.link).replace("label", y._label).replace("href", y._href).replace("title", y._title).getRegex();
+y.reflink = P(y.reflink).replace("label", y._label).replace("ref", S._label).getRegex();
+y.nolink = P(y.nolink).replace("ref", S._label).getRegex();
+y.reflinkSearch = P(y.reflinkSearch, "g").replace("reflink", y.reflink).replace("nolink", y.nolink).getRegex();
 y.normal = { ...y };
 y.pedantic = {
   ...y.normal,
@@ -4684,23 +4684,23 @@ y.pedantic = {
     endAst: /\*(?!\*)/g,
     endUnd: /_(?!_)/g
   },
-  link: $(/^!?\[(label)\]\((.*?)\)/).replace("label", y._label).getRegex(),
-  reflink: $(/^!?\[(label)\]\s*\[([^\]]*)\]/).replace("label", y._label).getRegex()
+  link: P(/^!?\[(label)\]\((.*?)\)/).replace("label", y._label).getRegex(),
+  reflink: P(/^!?\[(label)\]\s*\[([^\]]*)\]/).replace("label", y._label).getRegex()
 };
 y.gfm = {
   ...y.normal,
-  escape: $(y.escape).replace("])", "~|])").getRegex(),
+  escape: P(y.escape).replace("])", "~|])").getRegex(),
   _extended_email: /[A-Za-z0-9._+-]+(@)[a-zA-Z0-9-_]+(?:\.[a-zA-Z0-9-_]*[a-zA-Z0-9])+(?![-_])/,
   url: /^((?:ftp|https?):\/\/|www\.)(?:[a-zA-Z0-9\-]+\.?)+[^\s<]*|^email/,
   _backpedal: /(?:[^?!.,:;*_'"~()&]+|\([^)]*\)|&(?![a-zA-Z0-9]+;$)|[?!.,:;*_'"~)]+(?!$))+/,
   del: /^(~~?)(?=[^\s~])([\s\S]*?[^\s~])\1(?=[^~]|$)/,
   text: /^([`~]+|[^`~])(?:(?= {2,}\n)|(?=[a-zA-Z0-9.!#$%&'*+\/=?_`{\|}~-]+@)|[\s\S]*?(?:(?=[\\<!\[`*~_]|\b_|https?:\/\/|ftp:\/\/|www\.|$)|[^ ](?= {2,}\n)|[^a-zA-Z0-9.!#$%&'*+\/=?_`{\|}~-](?=[a-zA-Z0-9.!#$%&'*+\/=?_`{\|}~-]+@)))/
 };
-y.gfm.url = $(y.gfm.url, "i").replace("email", y.gfm._extended_email).getRegex();
+y.gfm.url = P(y.gfm.url, "i").replace("email", y.gfm._extended_email).getRegex();
 y.breaks = {
   ...y.gfm,
-  br: $(y.br).replace("{2,}", "*").getRegex(),
-  text: $(y.gfm.text).replace("\\b_", "\\b_| {2,}\\n").replace(/\{2,\}/g, "*").getRegex()
+  br: P(y.br).replace("{2,}", "*").getRegex(),
+  text: P(y.gfm.text).replace("\\b_", "\\b_| {2,}\\n").replace(/\{2,\}/g, "*").getRegex()
 };
 class he {
   constructor(u) {
@@ -5432,43 +5432,43 @@ Please report this to https://github.com/markedjs/marked.`, u) {
   };
 };
 const Te = new tr();
-function j(D, u) {
+function $(D, u) {
   return Te.parse(D, u);
 }
-j.options = j.setOptions = function(D) {
-  return Te.setOptions(D), j.defaults = Te.defaults, Ft(j.defaults), j;
+$.options = $.setOptions = function(D) {
+  return Te.setOptions(D), $.defaults = Te.defaults, Ft($.defaults), $;
 };
-j.getDefaults = lt;
-j.defaults = _e;
-j.use = function(...D) {
-  return Te.use(...D), j.defaults = Te.defaults, Ft(j.defaults), j;
+$.getDefaults = lt;
+$.defaults = _e;
+$.use = function(...D) {
+  return Te.use(...D), $.defaults = Te.defaults, Ft($.defaults), $;
 };
-j.walkTokens = function(D, u) {
+$.walkTokens = function(D, u) {
   return Te.walkTokens(D, u);
 };
-j.parseInline = Te.parseInline;
-j.Parser = de;
-j.parser = de.parse;
-j.Renderer = Qe;
-j.TextRenderer = ct;
-j.Lexer = he;
-j.lexer = he.lex;
-j.Tokenizer = Ze;
-j.Hooks = Le;
-j.parse = j;
-j.options;
-j.setOptions;
-j.use;
-j.walkTokens;
-j.parseInline;
+$.parseInline = Te.parseInline;
+$.Parser = de;
+$.parser = de.parse;
+$.Renderer = Qe;
+$.TextRenderer = ct;
+$.Lexer = he;
+$.lexer = he.lex;
+$.Tokenizer = Ze;
+$.Hooks = Le;
+$.parse = $;
+$.options;
+$.setOptions;
+$.use;
+$.walkTokens;
+$.parseInline;
 de.parse;
 he.lex;
 function at(D) {
   const u = D.split("---");
   try {
-    return j(u[2]);
+    return $(u[2]);
   } catch {
-    return D;
+    return $(D);
   }
 }
 async function rr(D) {
