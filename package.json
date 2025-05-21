@@ -16,9 +16,9 @@
     "marked": "^9.1.2",
     "mocha": "^10.2.0",
     "supertest": "^6.3.3",
-    "vite": "^4.4.5",
-    "vite-plugin-node-polyfills": "^0.15.0",
-    "vitest": "^2.0.5",
+    "vite": "^6.3.5",
+    "vite-plugin-node-polyfills": "^0.23.0",
+    "vitest": "^3.1.4",
     "x2js": "^3.4.4"
   }
 }
