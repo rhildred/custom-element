@@ -29,10 +29,10 @@ or
 <div><iframe srcdoc="<x-markdown2html src='https://github.com/rhildred/custom-element/raw/main/README.md'></x-markdown2html><script src='https://rhildred.github.io/custom-element/custom-element.js'></script>" frameborder="0"></iframe></div>
 ```
 
-You can also imbed this as an iframe
+You can also imbed this as an iframe. Adjust the height to suit.
 
 ```html
-<iframe src="https://rhildred.github.io/custom-element/index.html?src=https://github.com/rhildred/custom-element/raw/main/README.md" frameborder="0"></iframe>
+<iframe src="https://rhildred.github.io/custom-element/index.html?src=https://github.com/rhildred/custom-element/raw/main/README.md" frameborder="0" style="width:100%;height=25rem"></iframe>
 ```
 
 I did this so that I can embed my repositories in d2l/brightspace
